@@ -362,7 +362,7 @@ DEFINE_BITFIELD(smoothing_junction, list(
 	. = ..()
 	if(smoothing_flags & SMOOTH_FRILLS)
 		initialize_frills()
-		apply_wall_override
+		apply_wall_override()
 	else
 		deinitialize_frills()
 
