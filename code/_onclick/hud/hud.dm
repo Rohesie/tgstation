@@ -197,6 +197,11 @@ GLOBAL_LIST_INIT(available_ui_styles, list(
 	screenmob.reload_fullscreen()
 	update_parallax_pref(screenmob)
 
+	var/client/C = screenmob.client
+	for(var/thing in SSicon_smooth.frills)
+		var/obj/screen/filterfrill/frill = SSicon_smooth.frills[thing]
+		C.screen += frill
+
 	// ensure observers get an accurate and up-to-date view
 	if (!viewmob)
 		plane_masters_update()

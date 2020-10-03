@@ -153,3 +153,18 @@
 	render_target = O_LIGHTING_VISUAL_RENDER_TARGET
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	blend_mode = BLEND_MULTIPLY
+
+/obj/screen/plane_master/frill_cutter
+	name = "wall frill cutter plane master"
+	appearance_flags = PLANE_MASTER
+	plane = FRILL_CUTTER_PLANE
+	render_target = FRILL_CUTTER_RENDER_TARGET
+
+/obj/screen/plane_master/frill
+	name = "wall frill plane master"
+	appearance_flags = PLANE_MASTER
+	blend_mode = BLEND_OVERLAY
+	plane = FRILL_PLANE
+	filters = list(filter(type = "alpha", icon=icon('icons/turf/frills/screengradiant.dmi', "gradiant"), flags=MASK_INVERSE), \
+				   filter(type = "alpha", render_source = FRILL_CUTTER_RENDER_TARGET, flags=MASK_INVERSE) \
+				   )

@@ -14,7 +14,7 @@
 #define OPENSPACE_BACKDROP_PLANE -3 //Black square just over openspace plane to guaranteed cover all in openspace turf
 
 
-#define FLOOR_PLANE -2
+#define FLOOR_PLANE -3
 #define FLOOR_PLANE_RENDER_TARGET "FLOOR_PLANE"
 #define GAME_PLANE -1
 #define GAME_PLANE_RENDER_TARGET "GAME_PLANE"
@@ -23,6 +23,8 @@
 
 #define SPACE_LAYER 1.8
 //#define TURF_LAYER 2 //For easy recordkeeping; this is a byond define
+#define FRILL_PLANE 2
+#define FRILL_LAYER 2.01
 #define MID_TURF_LAYER 2.02
 #define HIGH_TURF_LAYER 2.03
 #define TURF_PLATING_DECAL_LAYER 2.031
@@ -37,7 +39,7 @@
 #define WIRE_LAYER 2.4
 #define WIRE_BRIDGE_LAYER 2.44
 #define WIRE_TERMINAL_LAYER 2.45
-#define GAS_SCRUBBER_LAYER 2.46 
+#define GAS_SCRUBBER_LAYER 2.46
 #define GAS_PIPE_VISIBLE_LAYER 2.47 //layer = initial(layer) + piping_layer / 1000 in atmospherics/update_icon() to determine order of pipe overlap
 #define GAS_FILTER_LAYER 2.48
 #define GAS_PUMP_LAYER 2.49
@@ -150,3 +152,6 @@
 #define SPLASHSCREEN_LAYER 24
 #define SPLASHSCREEN_PLANE 24
 #define SPLASHSCREEN_RENDER_TARGET "SPLASHSCREEN_PLANE"
+
+#define FRILL_CUTTER_PLANE 25
+#define FRILL_CUTTER_RENDER_TARGET "*FRILL_BLOCKER"

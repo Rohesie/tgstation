@@ -11,6 +11,8 @@
 #define SMOOTH_QUEUED	(1<<4)
 /// Smooths with objects, and will thus need to scan turfs for contents.
 #define SMOOTH_OBJ		(1<<5)
+/// Should have frills applied to it
+#define SMOOTH_FRILLS    (1<<6)
 
 DEFINE_BITFIELD(smoothing_flags, list(
 	"SMOOTH_CORNERS" = SMOOTH_CORNERS,
@@ -125,3 +127,5 @@ DEFINE_BITFIELD(smoothing_flags, list(
 #define SMOOTH_GROUP_CLEANABLE_DIRT	S_OBJ(67)			///obj/effect/decal/cleanable/dirt
 
 #define SMOOTH_GROUP_INDUSTRIAL_LIFT S_OBJ(70)			///obj/structure/industrial_lift
+
+#define RENDER_TARGET_WALL_FRILL_PREFIX "*WALL_FRILL_SCREEN_OBJ"

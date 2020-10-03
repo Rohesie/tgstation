@@ -340,12 +340,31 @@ DEFINE_BITFIELD(smoothing_junction, list(
 
 	set_smoothed_icon_state(new_junction)
 
+/atom/var/obj/screen/filterfrill/overlay_frill
 
 ///Changes the icon state based on the new junction bitmask.
 /atom/proc/set_smoothed_icon_state(new_junction)
+	if(smoothing_flags & SMOOTH_FRILLS)
+		remove_filter("wallfrill")
+		overlays -= overlay_frill
+		overlay_frill = null
+		if(!(new_junction & NORTH_JUNCTION))
+			add_filter("wallfrill", 5, list(type = "layer",y = 32, render_source="[RENDER_TARGET_WALL_FRILL_PREFIX]-[initial(icon)]-[base_icon_state]-frill-[new_junction & (EAST|WEST)]"))
+		else if(new_junction & (EAST_JUNCTION | WEST_JUNCTION))
+			var/masked_junc = new_junction & (NORTH_JUNCTION | EAST_JUNCTION | WEST_JUNCTION | NORTHEAST_JUNCTION | NORTHWEST_JUNCTION)
+			overlay_frill = SSicon_smooth.frills_opaque["[initial(icon)]_[initial(base_icon_state)]_[masked_junc]"]
+			overlays += overlay_frill
+
 	smoothing_junction = new_junction
 	icon_state = "[base_icon_state]-[smoothing_junction]"
 
+/turf/set_smoothed_icon_state(new_junction)
+	. = ..()
+	if(smoothing_flags & SMOOTH_FRILLS)
+		initialize_frills()
+		apply_wall_override
+	else
+		deinitialize_frills()
 
 /turf/closed/set_smoothed_icon_state(new_junction)
 	if(smoothing_flags & SMOOTH_DIAGONAL_CORNERS && new_junction != smoothing_junction)
@@ -474,6 +493,156 @@ DEFINE_BITFIELD(smoothing_junction, list(
 	smoothing_flags = SMOOTH_CORNERS|SMOOTH_DIAGONAL_CORNERS|SMOOTH_BORDER
 	smoothing_groups = null
 	canSmoothWith = null
+
+GLOBAL_LIST_EMPTY_TYPED(frill_wall_override_cache, /atom/movable/frill_wall_override)
+
+
+//alexdoc: alpha override ob
+/atom/movable/frill_wall_override
+	plane = GAME_PLANE
+	layer = TURF_LAYER
+
+//This needs to be on New because its added to the overlays right after, we might run into a race condition
+// where its added to the overlays before its initialized and once its added, it cannot be changed
+/atom/movable/frill_wall_override/New(loc, _icon, _icon_state)
+	. = ..()
+	icon = _icon
+	icon_state = _icon_state
+
+/turf/var/frillwall_is_initialized
+/turf/var/atom/movable/frill_wall_override/frillwall_overlay
+
+/turf/proc/apply_wall_override(_icon, _icon_state)
+	var/overrideicon = _icon ? _icon : initial(icon)
+	var/overrideiconstate = _icon_state ? _icon_state : icon_state
+
+	//Using a funny character to delimit the icon and icon_state because who will be adding that character at the end of their icon file name?
+	//overrideicon is an icon not a string so its forced into a string here
+	var/key = "[overrideicon]" + "¸" + overrideiconstate
+	var/cached = GLOB.frill_wall_override_cache[key]
+
+	overlays -= frillwall_overlay
+	if(cached)
+		frillwall_overlay = cached
+		overlays += frillwall_overlay
+	else
+
+		frillwall_overlay = new(null, overrideicon, overrideiconstate)
+		GLOB.frill_wall_override_cache[key] = frillwall_overlay
+		overlays += frillwall_overlay
+
+/turf/proc/initialize_frills()
+	if(frillwall_is_initialized)
+		return
+
+	icon = null
+	plane = FRILL_PLANE
+	apply_wall_override()
+	frillwall_is_initialized = TRUE
+
+/turf/proc/deinitialize_frills()
+	if(!frillwall_is_initialized)
+		return
+
+	//Remove the actual frill itself
+	remove_filter("wallfrill")
+	overlays -= overlay_frill
+	overlay_frill = null
+	//Makes the turf visible again
+	icon = initial(icon)
+
+	//Removes the plane
+	plane = initial(plane)
+	//Removes the overlay to not get affected by the plane
+	overlays -= frillwall_overlay
+	frillwall_overlay = null
+	frillwall_is_initialized = FALSE
+
+
+//This is the less expensive but less flexible variant that uses filters. One for every type of frill is sent to the client for quick rendering
+/obj/screen/filterfrill
+	name = "filter frill"
+	screen_loc = "CENTER" //We need this in order to make it "render" on the /client 's screen
+	filters = filter(type = "alpha", icon=icon('icons/turf/frills/frillgradiant.dmi', "gradiant"))
+	mouse_opacity = 0
+
+//We can't use Initialize here as we are sending all those images to the client as soon as we can,
+// if we dont set their properties before they're sent, we are going to have broken images
+/obj/screen/filterfrill/New(loc, _icon, _icon_state)
+	. = ..()
+
+	icon = _icon
+	icon_state = _icon_state
+	render_target = "[RENDER_TARGET_WALL_FRILL_PREFIX]-[icon]-[icon_state]"
+
+/obj/screen/filterfrill/ex_act(severity)
+	return FALSE
+
+/obj/screen/filterfrill/singularity_act()
+	return
+
+/obj/screen/filterfrill/singularity_pull()
+	return
+
+/obj/screen/filterfrill/blob_act()
+	return
+
+/obj/screen/filterfrill/onTransitZ()
+	return
+
+/obj/screen/filterfrill/forceMove(atom/destination, no_tp=FALSE, harderforce = FALSE)
+	if(harderforce)
+		return ..()
+
+
+
+
+//Its more expensive than filter frills but it allows more flexibility for icon manipulation on the parent
+/atom/movable/objectfrill
+	name = "object frill"
+	mouse_opacity = 0
+	plane = FRILL_PLANE
+	pixel_y = 32
+
+/atom/movable/objectfrill/ex_act(severity)
+	return FALSE
+
+/atom/movable/objectfrill/singularity_act()
+	return
+
+/atom/movable/objectfrill/singularity_pull()
+	return
+
+/atom/movable/objectfrill/blob_act()
+	return
+
+/atom/movable/objectfrill/onTransitZ()
+	return
+
+/atom/movable/objectfrill/forceMove(atom/destination, no_tp=FALSE, harderforce = FALSE)
+	if(harderforce)
+		return ..()
+
+/atom/movable/objectfrill/Initialize(mapload, _icon, _icon_state)
+	. = ..()
+
+	render_source = "[RENDER_TARGET_WALL_FRILL_PREFIX]-[_icon]-[_icon_state]"
+
+
+
+
+/atom/movable/frillcutter
+	plane = FRILL_CUTTER_PLANE
+	mouse_opacity = 0
+	filters = filter(type="drop_shadow", size=5, x=0,y=0, color="#000000", offset=3)
+
+/atom/movable/frillcutter/Initialize(mapload, atom/movable/source)
+	. = ..()
+
+	source.render_target = ref(source)
+	render_source = source.render_target
+	source.vis_contents += src
+
 
 #undef NORTH_JUNCTION
 #undef SOUTH_JUNCTION
