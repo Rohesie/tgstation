@@ -60,6 +60,9 @@
 	///Highest-intensity light affecting us, which determines our visibility.
 	var/affecting_dynamic_lumi = 0
 
+	/// Icon path. Smoothing objects larger than 32x32 require a visual object to represent the excess part, in order not to increase its hitbox. We call that a frill.
+	var/frill_icon
+
 
 /atom/movable/Initialize(mapload)
 	. = ..()
@@ -74,6 +77,8 @@
 		AddElement(/datum/element/light_blocking)
 	if(light_system == MOVABLE_LIGHT)
 		AddComponent(/datum/component/overlay_lighting)
+	if(frill_icon)
+		AddElement(/datum/element/frill, frill_icon)
 
 
 /atom/movable/Destroy(force)
