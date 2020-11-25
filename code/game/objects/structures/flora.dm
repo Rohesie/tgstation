@@ -371,8 +371,9 @@
 	name = "photosynthetic potted plant"
 	desc = "A bioluminescent plant."
 	icon_state = "plant-09"
-	light_color = COLOR_BRIGHT_BLUE
+	light_system = MOVABLE_LIGHT
 	light_range = 3
+	light_color = COLOR_BRIGHT_BLUE
 
 /obj/item/kirbyplants/fullysynthetic
 	name = "plastic potted plant"

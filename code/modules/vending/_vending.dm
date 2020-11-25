@@ -57,8 +57,9 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	armor = list(MELEE = 20, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 50, ACID = 70)
 	circuit = /obj/item/circuitboard/machine/vendor
 	payment_department = ACCOUNT_SRV
-	light_power = 0.5
+	light_system = STATIC_LIGHT
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
+	light_power = 0.5
 	/// Is the machine active (No sales pitches if off)!
 	var/active = 1
 	///Are we ready to vend?? Is it time??
@@ -248,13 +249,13 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 /obj/machinery/vending/update_icon_state()
 	if(machine_stat & BROKEN)
 		icon_state = "[initial(icon_state)]-broken"
-		set_light(0)
+		set_light_on(FALSE)
 	else if(powered())
 		icon_state = initial(icon_state)
-		set_light(1.4)
+		set_light_on(TRUE)
 	else
 		icon_state = "[initial(icon_state)]-off"
-		set_light(0)
+		set_light_on(FALSE)
 
 
 /obj/machinery/vending/update_overlays()

@@ -178,6 +178,8 @@
 ///from base of [/datum/reagent/proc/expose_atom]: (/turf, reac_volume)
 #define COMSIG_REAGENT_EXPOSE_TURF	"reagent_expose_turf"
 
+///Called right before the atom changes the value of light_system to a different one, from base atom/set_light_system(): (new_system)
+#define COMSIG_ATOM_SET_LIGHT_SYSTEM "atom_light_system"
 ///Called right before the atom changes the value of light_range to a different one, from base atom/set_light_range(): (new_range)
 #define COMSIG_ATOM_SET_LIGHT_RANGE "atom_set_light_range"
 ///Called right before the atom changes the value of light_power to a different one, from base atom/set_light_power(): (new_power)

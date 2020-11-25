@@ -11,6 +11,8 @@
 	anchored = TRUE
 	pixel_x = -16
 	resistance_flags = FIRE_PROOF
+	light_system = STATIC_LIGHT
+	light_on = FALSE
 	var/lit = FALSE
 
 	var/fuel_added = 0
@@ -85,22 +87,25 @@
 				. += "fireplace_fire4"
 		. += "fireplace_glow"
 
+
 /obj/structure/fireplace/proc/adjust_light()
 	if(!lit)
-		set_light(0)
+		set_light_on(FALSE)
 		return
-
 	switch(burn_time_remaining())
 		if(0 to 500)
-			set_light(1)
+			set_light_range(1)
 		if(500 to 1000)
-			set_light(2)
+			set_light_range(2)
 		if(1000 to 1500)
-			set_light(3)
+			set_light_range(3)
 		if(1500 to 2000)
-			set_light(4)
+			set_light_range(4)
 		if(2000 to MAXIMUM_BURN_TIMER)
-			set_light(6)
+			set_light_range(6)
+
+	set_light_on(TRUE)
+
 
 /obj/structure/fireplace/process(delta_time)
 	if(!lit)

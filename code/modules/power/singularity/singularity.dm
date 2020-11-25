@@ -8,6 +8,7 @@
 	density = TRUE
 	move_resist = INFINITY
 	layer = MASSIVE_OBJ_LAYER
+	light_system = MOVABLE_LIGHT
 	light_range = 6
 	appearance_flags = LONG_GLIDE
 
@@ -271,7 +272,6 @@
 		desc = "[initial(desc)] It glows fiercely with inner fire."
 		name = "supermatter-charged [initial(name)]"
 		consumed_supermatter = TRUE
-		set_light(10)
 
 /obj/singularity/proc/check_cardinals_range(steps, retry_with_move = FALSE)
 	. = length(GLOB.cardinals)			//Should be 4.

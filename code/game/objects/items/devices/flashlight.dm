@@ -32,8 +32,8 @@
 	else
 		icon_state = initial(icon_state)
 	set_light_on(on)
-	if(light_system == STATIC_LIGHT)
-		update_light()
+	//if(light_system == STATIC_LIGHT)
+	//	update_light()
 
 
 /obj/item/flashlight/attack_self(mob/user)
@@ -232,8 +232,8 @@
 	lefthand_file = 'icons/mob/inhands/items_lefthand.dmi'
 	righthand_file = 'icons/mob/inhands/items_righthand.dmi'
 	force = 10
+	light_system = MOVABLE_LIGHT
 	light_range = 5
-	light_system = STATIC_LIGHT
 	w_class = WEIGHT_CLASS_BULKY
 	flags_1 = CONDUCT_1
 	custom_materials = null
@@ -594,19 +594,9 @@
 	icon_state = "flashdark"
 	inhand_icon_state = "flashdark"
 	light_system = STATIC_LIGHT //The overlay light component is not yet ready to produce darkness.
-	light_range = 0
-	///Variable to preserve old lighting behavior in flashlights, to handle darkness.
-	var/dark_light_range = 2.5
-	///Variable to preserve old lighting behavior in flashlights, to handle darkness.
-	var/dark_light_power = -3
-
-
-/obj/item/flashlight/flashdark/update_brightness(mob/user)
-	. = ..()
-	if(on)
-		set_light(dark_light_range, dark_light_power)
-	else
-		set_light(0)
+	light_range = 2
+	light_power = -3
+	light_on = FALSE
 
 
 /obj/item/flashlight/eyelight

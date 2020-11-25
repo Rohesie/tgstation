@@ -10,10 +10,3 @@
 	luminosity -= affecting_dynamic_lumi
 	affecting_dynamic_lumi = highest
 	luminosity += affecting_dynamic_lumi
-
-
-///Helper to change several lighting overlay settings.
-/atom/movable/proc/set_light_range_power_color(range, power, color)
-	set_light_range(range)
-	set_light_power(power)
-	set_light_color(color)

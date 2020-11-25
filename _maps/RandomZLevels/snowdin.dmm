@@ -18,8 +18,8 @@
 "ag" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -1995,8 +1995,8 @@
 /obj/structure/flora/tree/pine,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -3443,8 +3443,8 @@
 "ig" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/cave/mountain)
@@ -3923,24 +3923,24 @@
 /obj/item/clothing/head/cone,
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/cave)
 "ja" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/cave)
 "jb" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/cave)
@@ -5551,8 +5551,8 @@
 /obj/effect/turf_decal/weather/snow,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/plating/snowed/smoothed,
@@ -5763,8 +5763,8 @@
 /obj/structure/flora/grass/both,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -6200,8 +6200,8 @@
 "oa" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/outside)
@@ -7690,8 +7690,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/post/engineering)
@@ -7844,8 +7844,8 @@
 /obj/structure/flora/tree/dead,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -8304,8 +8304,8 @@
 "tr" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /mob/living/simple_animal/hostile/bear/snow,
 /turf/open/floor/plating/asteroid/snow,
@@ -8417,8 +8417,8 @@
 "tS" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/ice/smooth,
 /area/awaymission/snowdin/cave)
@@ -8522,8 +8522,8 @@
 "uq" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/ice/smooth,
 /area/awaymission/snowdin/outside)
@@ -8708,13 +8708,13 @@
 "uX" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -9257,8 +9257,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -9739,8 +9739,8 @@
 "xR" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/ice/smooth,
 /area/awaymission/snowdin/cave)
@@ -10677,8 +10677,8 @@
 "Au" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/structure/flora/grass/both,
 /turf/open/floor/plating/asteroid/snow,
@@ -10780,8 +10780,8 @@
 "AJ" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow{
 	floor_variance = 0;
@@ -11554,8 +11554,8 @@
 "CS" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/machinery/light/small{
 	dir = 4
@@ -11756,8 +11756,8 @@
 "Dm" = (
 /obj/effect/light_emitter{
 	name = "cave light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/structure/fence/door{
 	dir = 4
@@ -12078,18 +12078,18 @@
 "DW" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -12575,8 +12575,8 @@
 /obj/effect/turf_decal/weather/snow,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed,
 /area/awaymission/snowdin/outside)
@@ -12632,8 +12632,8 @@
 /obj/structure/flora/bush,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -12652,8 +12652,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -12859,8 +12859,8 @@
 "FQ" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /obj/machinery/light/small,
 /turf/open/floor/plating/asteroid/snow,
@@ -12869,8 +12869,8 @@
 /obj/machinery/light/small,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/post/mining_main)
@@ -13018,8 +13018,8 @@
 /obj/structure/flora/stump,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -13046,8 +13046,8 @@
 	},
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed,
 /area/awaymission/snowdin/outside)
@@ -13297,8 +13297,8 @@
 "Hn" = (
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/cave/mountain)
@@ -13323,8 +13323,8 @@
 /obj/structure/fence,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/asteroid/snow,
 /area/awaymission/snowdin/outside)
@@ -13440,8 +13440,8 @@
 /obj/machinery/portable_atmospherics/canister,
 /obj/effect/light_emitter{
 	name = "outdoor light";
-	set_cap = 3;
-	set_luminosity = 6
+	light_power = 3;
+	light_range = 6
 	},
 /turf/open/floor/plating/snowed/smoothed,
 /area/awaymission/snowdin/outside)

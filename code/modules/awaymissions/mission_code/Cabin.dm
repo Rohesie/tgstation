@@ -41,6 +41,9 @@
 	icon = 'icons/obj/fireplace.dmi'
 	icon_state = "firepit-active"
 	density = FALSE
+	light_system = STATIC_LIGHT
+	light_range = 6
+	light_on = FALSE
 	var/active = 1
 
 /obj/structure/firepit/Initialize()
@@ -67,11 +70,11 @@
 /obj/structure/firepit/proc/toggleFirepit()
 	active = !active
 	if(active)
-		set_light(8)
 		icon_state = "firepit-active"
 	else
-		set_light(0)
 		icon_state = "firepit"
+	set_light_on(active)
+
 
 /obj/structure/firepit/extinguish()
 	if(active)

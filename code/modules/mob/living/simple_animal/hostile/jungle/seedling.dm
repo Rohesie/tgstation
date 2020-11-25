@@ -42,6 +42,7 @@
 	icon_state = "seedling"
 	damage = 10
 	damage_type = BURN
+	light_system = MOVABLE_LIGHT
 	light_range = 2
 	flag = ENERGY
 	light_color = LIGHT_COLOR_YELLOW

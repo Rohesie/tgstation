@@ -247,7 +247,8 @@
 	shrapnel_magnitude = 4
 	shred_triggerer = TRUE
 	arm_delay = 3 SECONDS
-	light_range = 1.6
+	light_system = MOVABLE_LIGHT
+	light_range = 2
 	light_power = 2
 	light_color = COLOR_VIVID_RED
 

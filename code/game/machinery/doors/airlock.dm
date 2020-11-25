@@ -61,6 +61,11 @@
 
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_REQUIRES_SILICON | INTERACT_MACHINE_OPEN
 
+	light_system = STATIC_LIGHT
+	light_range = 2
+	light_power = 1
+	light_on = FALSE
+
 	var/security_level = 0 //How much are wires secured
 	var/aiControlDisabled = AI_WIRE_NORMAL //If 1, AI control is disabled until the AI hacks back in and disables the lock. If 2, the AI has bypassed the lock. If -1, the control is enabled but the AI had bypassed it earlier, so if it is disabled again the AI would have no trouble getting back in.
 	var/hackProof = FALSE // if true, this door can't be hacked by the AI
@@ -594,25 +599,25 @@
 		if(unres_sides & NORTH)
 			var/image/I = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_n")
 			I.pixel_y = 32
-			set_light(l_range = 2, l_power = 1)
+			set_light_on(TRUE)
 			add_overlay(I)
 		if(unres_sides & SOUTH)
 			var/image/I = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_s")
 			I.pixel_y = -32
-			set_light(l_range = 2, l_power = 1)
+			set_light_on(TRUE)
 			add_overlay(I)
 		if(unres_sides & EAST)
 			var/image/I = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_e")
 			I.pixel_x = 32
-			set_light(l_range = 2, l_power = 1)
+			set_light_on(TRUE)
 			add_overlay(I)
 		if(unres_sides & WEST)
 			var/image/I = image(icon='icons/obj/doors/airlocks/station/overlays.dmi', icon_state="unres_w")
 			I.pixel_x = -32
-			set_light(l_range = 2, l_power = 1)
+			set_light_on(TRUE)
 			add_overlay(I)
 	else
-		set_light(0)
+		set_light_on(FALSE)
 
 /obj/machinery/door/airlock/do_animate(animation)
 	switch(animation)

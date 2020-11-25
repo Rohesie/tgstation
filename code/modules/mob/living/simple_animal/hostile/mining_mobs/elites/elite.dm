@@ -96,8 +96,9 @@ While using this makes the system rely on OnFire, it still gives options for tim
 	icon_state = "tumor"
 	pixel_x = -16
 	base_pixel_x = -16
-	light_color = COLOR_SOFT_RED
+	light_system = STATIC_LIGHT
 	light_range = 3
+	light_color = COLOR_SOFT_RED
 	anchored = TRUE
 	density = FALSE
 	var/activity = TUMOR_INACTIVE
@@ -192,7 +193,7 @@ While using this makes the system rely on OnFire, it still gives options for tim
 		visible_message("<span class='boldwarning'>As [user] drops the core into [src], [src] appears to swell.</span>")
 		icon_state = "advanced_tumor"
 		boosted = TRUE
-		light_range = 6
+		set_light_range(6)
 		desc = "[desc]  This one seems to glow with a strong intensity."
 		qdel(core)
 		return TRUE
@@ -310,8 +311,9 @@ While using this makes the system rely on OnFire, it still gives options for tim
 	canSmoothWith = list(SMOOTH_GROUP_HIERO_WALL)
 	duration = 50
 	layer = BELOW_MOB_LAYER
-	color = rgb(255,0,0)
-	light_range = MINIMUM_USEFUL_LIGHT_RANGE
+	color = COLOR_RED
+	light_system = STATIC_LIGHT
+	light_range = 1
 	light_color = COLOR_SOFT_RED
 	var/mob/living/carbon/human/activator = null
 	var/mob/living/simple_animal/hostile/asteroid/elite/ourelite = null

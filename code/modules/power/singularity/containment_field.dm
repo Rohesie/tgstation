@@ -12,6 +12,7 @@
 	interaction_flags_atom = NONE
 	interaction_flags_machine = NONE
 	CanAtmosPass = ATMOS_PASS_NO
+	light_system = STATIC_LIGHT
 	light_range = 4
 	layer = ABOVE_OBJ_LAYER
 	var/obj/machinery/field/generator/FG1 = null

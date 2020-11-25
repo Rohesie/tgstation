@@ -84,7 +84,7 @@
 
 	data["has_light"] = has_light
 	data["light_on"] = light_on
-	data["comp_light_color"] = comp_light_color
+	data["comp_light_color"] = light_color
 	return data
 
 

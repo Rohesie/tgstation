@@ -41,6 +41,9 @@ Possible to do for anyone motivated enough:
 	max_integrity = 300
 	armor = list(MELEE = 50, BULLET = 20, LASER = 20, ENERGY = 20, BOMB = 0, BIO = 0, RAD = 0, FIRE = 50, ACID = 0)
 	circuit = /obj/item/circuitboard/machine/holopad
+	light_system = STATIC_LIGHT
+	light_range = 2
+	light_on = FALSE
 	/// List of living mobs that use the holopad
 	var/list/masters
 	/// Holoray-mob link
@@ -408,7 +411,7 @@ Possible to do for anyone motivated enough:
 		Hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
 		Hologram.set_anchored(TRUE)//So space wind cannot drag it.
 		Hologram.name = "[user.name] (Hologram)"//If someone decides to right click.
-		Hologram.set_light(2)	//hologram lighting
+		Hologram.set_light_on(TRUE)	//hologram lighting
 		move_hologram()
 
 		set_holo(user, Hologram)
@@ -443,9 +446,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	use_power = total_users > 0 ? ACTIVE_POWER_USE : IDLE_POWER_USE
 	active_power_usage = HOLOPAD_PASSIVE_POWER_USAGE + (HOLOGRAM_POWER_USAGE * total_users)
 	if(total_users || replay_mode)
-		set_light(2)
+		set_light_on(TRUE)
 	else
-		set_light(0)
+		set_light_on(FALSE)
 	update_icon()
 
 /obj/machinery/holopad/update_icon_state()
@@ -566,7 +569,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	Hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
 	Hologram.set_anchored(TRUE)//So space wind cannot drag it.
 	Hologram.name = "[record.caller_name] (Hologram)"//If someone decides to right click.
-	Hologram.set_light(2)	//hologram lighting
+	Hologram.set_light_on(TRUE) //hologram lighting
 	visible_message("<span class='notice'>A holographic image of [record.caller_name] flickers to life before your eyes!</span>")
 	return Hologram
 
@@ -664,6 +667,9 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		QDEL_NULL(disk.record)
 
 /obj/effect/overlay/holo_pad_hologram
+	light_system = MOVABLE_LIGHT
+	light_range = 2
+	light_on = FALSE
 	initial_language_holder = /datum/language_holder/universal
 	var/mob/living/Impersonation
 	var/datum/holocall/HC

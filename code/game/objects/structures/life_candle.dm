@@ -3,7 +3,10 @@
 	desc = "You are dead. Insert quarter to continue."
 	icon = 'icons/obj/candle.dmi'
 	icon_state = "candle1"
+	light_system = STATIC_LIGHT
+	light_range = 2
 	light_color = LIGHT_COLOR_FIRE
+	light_on = FALSE
 
 	var/icon_state_active = "candle1_lit"
 	var/icon_state_inactive = "candle1"
@@ -12,7 +15,6 @@
 
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
 
-	var/lit_luminosity = 2
 	var/list/datum/mind/linked_minds = list()
 
 	// If the body is destroyed, what do we spawn for them
@@ -41,10 +43,10 @@
 	float(linked_minds.len)
 	if(linked_minds.len)
 		START_PROCESSING(SSobj, src)
-		set_light(lit_luminosity)
+		set_light_on(TRUE)
 	else
 		STOP_PROCESSING(SSobj, src)
-		set_light(0)
+		set_light_on(FALSE)
 
 /obj/structure/life_candle/update_icon_state()
 	if(linked_minds.len)

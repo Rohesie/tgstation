@@ -114,15 +114,20 @@
 	set_basalt_light(src)
 
 /turf/open/floor/plating/asteroid/getDug()
-	set_light(0)
+	set_light_on(FALSE)
 	return ..()
 
 /proc/set_basalt_light(turf/open/floor/B)
 	switch(B.icon_state)
 		if("basalt1", "basalt2", "basalt3")
-			B.set_light(2, 0.6, LIGHT_COLOR_LAVA) //more light
+			B.set_light_system(STATIC_LIGHT)
+			SET_LIGHT_RANGE_POWER_COLOR(B, 2, 0.6, LIGHT_COLOR_LAVA)
+			B.set_light_on(TRUE)
 		if("basalt5", "basalt9")
-			B.set_light(1.4, 0.6, LIGHT_COLOR_LAVA) //barely anything!
+			B.set_light_system(STATIC_LIGHT)
+			SET_LIGHT_RANGE_POWER_COLOR(B, 1, 0.6, LIGHT_COLOR_LAVA)
+			B.set_light_on(TRUE)
+
 
 ///////Surface. The surface is warm, but survivable without a suit. Internals are required. The floors break to chasms, which drop you into the underground.
 

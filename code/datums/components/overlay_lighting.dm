@@ -1,8 +1,3 @@
-///For switchable lights, is it on and currently emitting light?
-#define LIGHTING_ON (1<<0)
-///Is the parent attached to something else, its loc? Then we need to keep an eye of this.
-#define LIGHTING_ATTACHED (1<<1)
-
 #define GET_PARENT (parent_attached_to || parent)
 
 #define GET_LIGHT_SOURCE (directional_atom || current_holder)
@@ -53,7 +48,7 @@
 		)
 
 	///Overlay effect to cut into the darkness and provide light.
-	var/obj/effect/overlay/light_visible/visible_mask
+	var/atom/movable/vis_obj/lighting_mask/visible_mask
 	///Lazy list to track the turfs being affected by our light, to determine their visibility.
 	var/list/turf/affected_turfs
 	///Movable atom currently holding the light. Parent might be a flashlight, for example, but that might be held by a mob or something else.
@@ -65,7 +60,7 @@
 	///Abstractional atom for directional light, we move this around to make the directional effect
 	var/obj/effect/abstract/directional_lighting/directional_atom
 	///A cone overlay for directional light, it's alpha and color are dependant on the light
-	var/obj/effect/overlay/light_cone/cone
+	var/atom/movable/vis_obj/lighting_cone_mask/cone
 	///Current tracked direction for the directional cast behaviour
 	var/current_direction
 	///Cast range for the directional cast (how far away the atom is moved)
@@ -104,6 +99,7 @@
 
 /datum/component/overlay_lighting/RegisterWithParent()
 	. = ..()
+	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_SYSTEM, .proc/on_system_change)
 	if(directional)
 		RegisterSignal(parent, COMSIG_ATOM_DIR_CHANGE, .proc/on_parent_dir_change)
 	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, .proc/on_parent_moved)
@@ -128,6 +124,7 @@
 	set_holder(null)
 	clean_old_turfs()
 	UnregisterSignal(parent, list(
+		COMSIG_ATOM_SET_LIGHT_SYSTEM,
 		COMSIG_MOVABLE_MOVED,
 		COMSIG_ATOM_SET_LIGHT_RANGE,
 		COMSIG_ATOM_SET_LIGHT_POWER,
@@ -152,6 +149,12 @@
 		QDEL_NULL(directional_atom)
 		QDEL_NULL(cone)
 	return ..()
+
+
+///Handles a lighting system change.
+/datum/component/overlay_lighting/proc/on_system_change(atom/source, new_system)
+	SIGNAL_HANDLER
+	qdel(src)
 
 
 ///Clears the affected_turfs lazylist, removing from its contents the effects of being near the light.
@@ -455,8 +458,7 @@
 	RegisterSignal(new_craft, COMSIG_ATOM_USED_IN_CRAFT, .proc/on_parent_crafted)
 	set_parent_attached_to(new_craft)
 
-#undef LIGHTING_ON
-#undef LIGHTING_ATTACHED
+
 #undef GET_PARENT
 #undef GET_LIGHT_SOURCE
 #undef SHORT_CAST

@@ -222,6 +222,8 @@
 	idle_power_usage = 2
 	active_power_usage = 20
 	power_channel = AREA_USAGE_LIGHT //Lights are calc'd via area so they dont need to be in the machine list
+	light_system = STATIC_LIGHT
+	light_on = FALSE
 	var/on = FALSE					// 1 if on, 0 if off
 	var/on_gs = FALSE
 	var/static_power_used = 0
@@ -384,7 +386,7 @@
 			PO = nightshift_light_power
 			if(!color)
 				CO = nightshift_light_color
-		var/matching = light && BR == light.light_range && PO == light.light_power && CO == light.light_color
+		var/matching = BR == light_range && PO == light_power && CO == light_color
 		if(!matching)
 			switchcount++
 			if(rigged)
@@ -395,14 +397,15 @@
 					burn_out()
 			else
 				use_power = ACTIVE_POWER_USE
-				set_light(BR, PO, CO)
+				SET_LIGHT_RANGE_POWER_COLOR(src, BR, PO, CO)
+				set_light_on(TRUE)
 	else if(has_emergency_power(LIGHT_EMERGENCY_POWER_USE) && !turned_off())
 		use_power = IDLE_POWER_USE
 		emergency_mode = TRUE
 		START_PROCESSING(SSmachines, src)
 	else
 		use_power = IDLE_POWER_USE
-		set_light(0)
+		set_light_on(FALSE)
 	update_icon()
 
 	active_power_usage = (brightness * 10)
@@ -442,7 +445,7 @@
 		status = LIGHT_BURNED
 		icon_state = "[base_state]-burned"
 		on = FALSE
-		set_light(0)
+		set_light_on(FALSE)
 
 // attempt to set the light's on/off status
 // will not switch on if broken/burned/empty
@@ -614,7 +617,8 @@
 		burn_out()
 		return FALSE
 	cell.use(pwr)
-	set_light(brightness * bulb_emergency_brightness_mul, max(bulb_emergency_pow_min, bulb_emergency_pow_mul * (cell.charge / cell.maxcharge)), bulb_emergency_colour)
+	SET_LIGHT_RANGE_POWER_COLOR(src, brightness * bulb_emergency_brightness_mul, max(bulb_emergency_pow_min, bulb_emergency_pow_mul * (cell.charge / cell.maxcharge)), bulb_emergency_colour)
+	set_light_on(TRUE)
 	return TRUE
 
 

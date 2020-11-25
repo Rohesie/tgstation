@@ -22,7 +22,7 @@
 /turf/proc/lighting_build_overlay()
 	if (lighting_object)
 		qdel(lighting_object,force=TRUE) //Shitty fix for lighting objects persisting after death
-
+	/*
 	var/area/A = loc
 	if (!IS_DYNAMIC_LIGHTING(A) && !light_sources)
 		return
@@ -44,6 +44,7 @@
 				S = thing
 				S.recalc_corner(C)
 			C.active = TRUE
+	*/
 
 // Used to get a scaled lumcount.
 /turf/proc/get_lumcount(minlum = 0, maxlum = 1)

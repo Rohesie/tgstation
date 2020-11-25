@@ -13,10 +13,15 @@
 /turf/open/floor/circuit
 	icon = 'icons/turf/floors.dmi'
 	icon_state = "bcircuit"
-	var/icon_normal = "bcircuit"
+	light_system = STATIC_LIGHT
+	light_range = 1
+	light_power = 0.5
 	light_color = LIGHT_COLOR_CYAN
+	light_on = FALSE
 	floor_tile = /obj/item/stack/tile/circuit
 	var/on = TRUE
+	var/icon_normal = "bcircuit"
+
 
 /turf/open/floor/circuit/Initialize()
 	SSmapping.nuke_tiles += src
@@ -35,10 +40,10 @@
 		else
 			icon_state = icon_normal
 			set_light_color(initial(light_color))
-		set_light(1.4, 0.5)
 	else
 		icon_state = "[icon_normal]off"
-		set_light(0)
+	set_light_on(on)
+
 
 /turf/open/floor/circuit/off
 	icon_state = "bcircuitoff"

@@ -7,6 +7,10 @@
 	icon_state = "sparkler"
 	w_class = WEIGHT_CLASS_TINY
 	heat = 1000
+	light_system = MOVABLE_LIGHT
+	light_range = 2
+	light_power = 2
+	light_on = FALSE
 	/// Burn time in seconds
 	var/burntime = 120
 	var/lit = FALSE
@@ -33,7 +37,7 @@
 	name = "lit [initial(name)]"
 	attack_verb_continuous = list("burns")
 	attack_verb_simple = list("burn")
-	set_light(l_range = 2, l_power = 2)
+	set_light_on(TRUE)
 	damtype = BURN
 	START_PROCESSING(SSobj, src)
 	playsound(src, 'sound/effects/fuse.ogg', 20, TRUE)

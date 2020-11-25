@@ -7,7 +7,10 @@
 	icon_state = "candle1"
 	inhand_icon_state = "candle1"
 	w_class = WEIGHT_CLASS_TINY
+	light_system = STATIC_LIGHT
+	light_range = CANDLE_LUMINOSITY
 	light_color = LIGHT_COLOR_FIRE
+	light_on = FALSE
 	heat = 1000
 	/// How many seconds it burns for
 	var/wax = 2000
@@ -43,7 +46,7 @@
 		lit = TRUE
 		if(show_message)
 			usr.visible_message(show_message)
-		set_light(CANDLE_LUMINOSITY)
+		set_light_on(TRUE)
 		START_PROCESSING(SSobj, src)
 		update_icon()
 
@@ -52,7 +55,7 @@
 		return
 	lit = FALSE
 	update_icon()
-	set_light(0)
+	set_light_on(FALSE)
 	return TRUE
 
 /obj/item/candle/extinguish()

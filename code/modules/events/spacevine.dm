@@ -81,8 +81,12 @@
 	severity = 4
 
 /datum/spacevine_mutation/light/on_grow(obj/structure/spacevine/holder)
-	if(holder.energy)
-		holder.set_light(severity, 0.3)
+	if(!holder.energy)
+		return
+	holder.set_light_range(severity)
+	holder.set_light_power(0.3)
+	holder.set_light_system(STATIC_LIGHT)
+
 
 /datum/spacevine_mutation/toxicity
 	name = "toxic"

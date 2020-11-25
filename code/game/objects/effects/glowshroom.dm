@@ -9,6 +9,8 @@
 	icon = 'icons/obj/lighting.dmi'
 	icon_state = "glowshroom" //replaced in New
 	layer = ABOVE_NORMAL_TURF_LAYER
+	light_system = STATIC_LIGHT
+	light_on = FALSE
 	/// Time interval between glowshroom "spreads"
 	var/delay_spread = 2 MINUTES
 	/// Time interval between glowshroom decay checks
@@ -78,7 +80,8 @@
 		myseed.genes -= G
 		G = new G
 		myseed.genes += G
-	set_light(G.glow_range(myseed), G.glow_power(myseed), G.glow_color)
+	SET_LIGHT_RANGE_POWER_COLOR(src, G.glow_range(myseed), G.glow_power(myseed), G.glow_color)
+	set_light_on(TRUE)
 	setDir(CalcDir())
 	base_icon_state = initial(icon_state)
 	if(!floor)

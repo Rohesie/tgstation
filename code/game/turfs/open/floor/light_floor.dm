@@ -6,6 +6,7 @@
 /turf/open/floor/light
 	name = "light floor"
 	desc = "A wired glass tile embedded into the floor. Modify the color with a Multitool."
+	light_system = STATIC_LIGHT
 	light_range = 5
 	icon_state = "light_on-1"
 	floor_tile = /obj/item/stack/tile/light
@@ -65,25 +66,26 @@
 			if(LIGHTFLOOR_FINE)
 				icon_state = "light_on-[LAZYFIND(coloredlights, currentcolor)]"
 				set_light_color(currentcolor)
-				set_light(5)
-				light_range = 3
+				set_light_range(3)
+				set_light_on(TRUE)
 			if(LIGHTFLOOR_FLICKER)
 				icon_state = "light_on_flicker-[LAZYFIND(coloredlights, currentcolor)]"
 				set_light_color(currentcolor)
-				set_light(3)
-				light_range = 2
+				set_light_range(2)
+				set_light_on(TRUE)
 			if(LIGHTFLOOR_BREAKING)
 				icon_state = "light_on_broken"
-				set_light(1)
+				set_light_range(1)
+				set_light_on(TRUE)
 			if(LIGHTFLOOR_BROKEN)
 				icon_state = "light_off"
-				set_light(0)
+				set_light_on(FALSE)
 	else
-		set_light(0)
+		set_light_on(FALSE)
 		icon_state = "light_off"
 
 /turf/open/floor/light/ChangeTurf(path, new_baseturf, flags)
-	set_light(0)
+	set_light_on(FALSE)
 	return ..()
 
 /turf/open/floor/light/screwdriver_act(mob/living/user, obj/item/I)

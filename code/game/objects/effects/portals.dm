@@ -226,3 +226,11 @@
 /obj/effect/portal/permanent/one_way/one_use/teleport(atom/movable/M, force = FALSE)
 	. = ..()
 	qdel(src)
+
+/obj/effect/portal/permanent/one_way/wendigo
+	id = "wendigo arena exit"
+	color = COLOR_RED_LIGHT
+	light_system = STATIC_LIGHT
+	light_range = 7
+	light_power = 1
+	light_color = COLOR_SOFT_RED

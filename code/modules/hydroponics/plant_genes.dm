@@ -320,8 +320,8 @@
 
 /datum/plant_gene/trait/glow/on_new(obj/item/food/grown/G, newloc)
 	. = ..()
-	G.light_system = MOVABLE_LIGHT
-	G.AddComponent(/datum/component/overlay_lighting, glow_range(G.seed), glow_power(G.seed), glow_color)
+	SET_LIGHT_RANGE_POWER_COLOR(G, glow_range(G.seed), glow_power(G.seed), glow_color)
+	G.set_light_system(MOVABLE_LIGHT)
 
 /datum/plant_gene/trait/glow/shadow
 	//makes plant emit slightly purple shadows

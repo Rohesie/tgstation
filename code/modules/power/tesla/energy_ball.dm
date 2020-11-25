@@ -20,7 +20,10 @@
 	appearance_flags = LONG_GLIDE
 	density = TRUE
 	layer = MASSIVE_OBJ_LAYER
+	light_system = MOVABLE_LIGHT
 	light_range = 6
+	light_power = 3
+	light_color = COLOR_TESLA_BALL_BLUE
 	move_resist = INFINITY
 	obj_flags = CAN_BE_HIT | DANGEROUS_POSSESSION
 	pixel_x = -32

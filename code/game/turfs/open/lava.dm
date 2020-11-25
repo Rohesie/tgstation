@@ -7,6 +7,7 @@
 	baseturfs = /turf/open/lava //lava all the way down
 	slowdown = 2
 
+	light_system = STATIC_LIGHT
 	light_range = 2
 	light_power = 0.75
 	light_color = LIGHT_COLOR_LAVA

@@ -212,7 +212,7 @@
 		return
 	var/power = GET_MUTATION_POWER(src)
 
-	glowth.set_light_range_power_color(range * power, glow, glow_color)
+	SET_LIGHT_RANGE_POWER_COLOR(glowth, range * power, glow, glow_color)
 
 
 /// Returns the color for the glow effect

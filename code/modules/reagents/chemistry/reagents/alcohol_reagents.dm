@@ -656,23 +656,16 @@ All effects don't start immediately, but rather get worse over time; the rate is
 	glass_icon_state = "tequilasunriseglass"
 	glass_name = "tequila Sunrise"
 	glass_desc = "Oh great, now you feel nostalgic about sunrises back on Terra..."
-	var/obj/effect/light_holder
+	var/static/obj/effect/dummy/lighting_obj/moblight/light_holder = new(null, 3, 0.7, COLOR_GOLDEN_YELLOW_MUSTARD)
 
 /datum/reagent/consumable/ethanol/tequila_sunrise/on_mob_metabolize(mob/living/M)
 	to_chat(M, "<span class='notice'>You feel gentle warmth spread through your body!</span>")
-	light_holder = new(M)
-	light_holder.set_light(3, 0.7, "#FFCC00") //Tequila Sunrise makes you radiate dim light, like a sunrise!
-
-/datum/reagent/consumable/ethanol/tequila_sunrise/on_mob_life(mob/living/carbon/M)
-	if(QDELETED(light_holder))
-		holder.del_reagent(type) //If we lost our light object somehow, remove the reagent
-	else if(light_holder.loc != M)
-		light_holder.forceMove(M)
-	return ..()
+	M.vis_contents += light_holder
 
 /datum/reagent/consumable/ethanol/tequila_sunrise/on_mob_end_metabolize(mob/living/M)
 	to_chat(M, "<span class='notice'>The warmth in your body fades.</span>")
-	QDEL_NULL(light_holder)
+	M.vis_contents -= light_holder
+
 
 /datum/reagent/consumable/ethanol/toxins_special
 	name = "Toxins Special"

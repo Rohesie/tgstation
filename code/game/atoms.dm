@@ -97,8 +97,8 @@
 	/// Last appearance of the atom for demo saving purposes
 	var/image/demo_last_appearance
 
-	///Light systems, both shouldn't be active at the same time.
-	var/light_system = STATIC_LIGHT
+	///Light systems, no more than one should be active at the same time.
+	var/light_system = NO_LIGHT_SUPPORT
 	///Range of the light in tiles. Zero means no light.
 	var/light_range = 0
 	///Intensity of the light. The stronger, the less shadows you will see on the lit area.
@@ -220,8 +220,9 @@
 	if(color)
 		add_atom_colour(color, FIXED_COLOUR_PRIORITY)
 
-	if (light_system == STATIC_LIGHT && light_power && light_range)
-		update_light()
+	if (light_system == STATIC_LIGHT)
+		AddComponent(/datum/component/static_lighting)
+		//update_light()
 
 	if (length(smoothing_groups))
 		sortTim(smoothing_groups) //In case it's not properly ordered, let's avoid duplicate entries with the same values.
@@ -1029,26 +1030,20 @@
  */
 /atom/vv_edit_var(var_name, var_value)
 	switch(var_name)
+		if(NAMEOF(src, light_system))
+			set_light_system(var_value)
+			. =  TRUE
 		if(NAMEOF(src, light_range))
-			if(light_system == STATIC_LIGHT)
-				set_light(l_range = var_value)
-			else
-				set_light_range(var_value)
+			set_light_range(var_value)
 			. =  TRUE
 		if(NAMEOF(src, light_power))
-			if(light_system == STATIC_LIGHT)
-				set_light(l_power = var_value)
-			else
-				set_light_power(var_value)
+			set_light_power(var_value)
 			. =  TRUE
 		if(NAMEOF(src, light_color))
-			if(light_system == STATIC_LIGHT)
-				set_light(l_color = var_value)
-			else
-				set_light_color(var_value)
+			set_light_color(var_value)
 			. =  TRUE
 		if(NAMEOF(src, light_on))
-			set_smoothed_icon_state(var_value)
+			set_light_on(var_value)
 			. =  TRUE
 		if(NAMEOF(src, light_flags))
 			set_light_flags(var_value)

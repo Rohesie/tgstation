@@ -26,6 +26,7 @@
 	desc = "A field of bluespace energy, locking on to teleport a target."
 	icon = 'icons/effects/effects.dmi'
 	icon_state = "dragnetfield"
+	light_system = STATIC_LIGHT
 	light_range = 3
 	anchored = TRUE
 

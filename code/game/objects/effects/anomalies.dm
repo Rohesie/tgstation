@@ -9,6 +9,7 @@
 	icon_state = "bhole3"
 	density = FALSE
 	anchored = TRUE
+	light_system = MOVABLE_LIGHT
 	light_range = 3
 
 	var/obj/item/assembly/signaler/anomaly/aSignal = /obj/item/assembly/signaler/anomaly

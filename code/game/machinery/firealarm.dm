@@ -25,9 +25,11 @@
 	power_channel = AREA_USAGE_ENVIRON
 	resistance_flags = FIRE_PROOF
 
-	light_power = 0
+	light_system = STATIC_LIGHT
 	light_range = 7
+	light_power = 0.8
 	light_color = COLOR_VIVID_RED
+	light_on = FALSE
 
 	//Trick to get the glowing overlay visible from a distance
 	luminosity = 1
@@ -48,6 +50,7 @@
 		pixel_y = (dir & 3)? (dir ==1 ? -24 : 24) : 0
 	update_icon()
 	myarea = get_area(src)
+	set_light_on(myarea.fire)
 	LAZYADD(myarea.firealarms, src)
 
 /obj/machinery/firealarm/Destroy()
@@ -305,13 +308,6 @@
 		new /obj/item/stack/cable_coil(loc, 3)
 	qdel(src)
 
-/obj/machinery/firealarm/proc/update_fire_light(fire)
-	if(fire == !!light_power)
-		return  // do nothing if we're already active
-	if(fire)
-		set_light(l_power = 0.8)
-	else
-		set_light(l_power = 0)
 
 /*
  * Return of Party button

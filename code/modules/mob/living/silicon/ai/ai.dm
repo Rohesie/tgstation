@@ -724,7 +724,7 @@
 		to_chat(src, "Camera lights deactivated.")
 
 		for (var/obj/machinery/camera/C in lit_cameras)
-			C.set_light(0)
+			C.set_light_on(FALSE)
 			lit_cameras = list()
 
 		return

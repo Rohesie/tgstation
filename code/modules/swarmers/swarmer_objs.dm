@@ -9,12 +9,9 @@
 	light_color = LIGHT_COLOR_CYAN
 	max_integrity = 30
 	anchored = TRUE
-	///How strong the light effect for the structure is
-	var/glow_range = 1
+	light_system = STATIC_LIGHT
+	light_range = 1
 
-/obj/structure/swarmer/Initialize(mapload)
-	. = ..()
-	set_light(glow_range)
 
 /obj/structure/swarmer/play_attack_sound(damage_amount, damage_type = BRUTE, damage_flag = 0)
 	switch(damage_type)
@@ -47,8 +44,9 @@
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 100, BOMB = 50, BIO = 100, RAD = 100, FIRE = 100, ACID = 100)
 	max_integrity = 400
 	layer = MASSIVE_OBJ_LAYER
+	light_system = STATIC_LIGHT
+	light_range = 7
 	light_color = LIGHT_COLOR_CYAN
-	light_range = 10
 	anchored = TRUE
 	density = FALSE
 	///Whether or not a swarmer is currently being created by this beacon

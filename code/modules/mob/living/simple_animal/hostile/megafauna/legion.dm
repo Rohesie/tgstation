@@ -322,8 +322,9 @@
 	desc = "The eye pierces your soul."
 	icon = 'icons/mob/lavaland/lavaland_monsters.dmi'
 	icon_state = "legion_turret"
-	light_power = 0.5
+	light_system = STATIC_LIGHT
 	light_range = 2
+	light_power = 0.5
 	max_integrity = 80
 	luminosity = 6
 	anchored = TRUE

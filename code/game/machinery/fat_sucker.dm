@@ -7,6 +7,11 @@
 	state_open = FALSE
 	density = TRUE
 	req_access = list(ACCESS_KITCHEN)
+	light_system = STATIC_LIGHT
+	light_range = 2
+	light_power = 1
+	light_color = COLOR_RED
+	light_on = FALSE
 	var/processing = FALSE
 	var/start_at = NUTRITION_LEVEL_WELL_FED
 	var/stop_at = NUTRITION_LEVEL_STARVING
@@ -160,7 +165,7 @@
 			processing = TRUE
 			soundloop.start()
 			update_icon()
-			set_light(2, 1, "#ff0000")
+			set_light_on(TRUE)
 		else
 			say("Subject not fat enough.")
 			playsound(src, 'sound/machines/buzz-sigh.ogg', 40, FALSE)
@@ -169,7 +174,7 @@
 /obj/machinery/fat_sucker/proc/stop()
 	processing = FALSE
 	soundloop.stop()
-	set_light(0, 0)
+	set_light_on(FALSE)
 
 /obj/machinery/fat_sucker/proc/make_meat()
 	if(occupant && iscarbon(occupant))

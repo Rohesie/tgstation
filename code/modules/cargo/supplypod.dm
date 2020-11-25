@@ -543,6 +543,7 @@
 	icon = 'icons/obj/supplypods_32x32.dmi'
 	icon_state = "LZ"
 	layer = PROJECTILE_HIT_THRESHHOLD_LAYER
+	light_system = MOVABLE_LIGHT
 	light_range = 2
 	anchored = TRUE
 	alpha = 0

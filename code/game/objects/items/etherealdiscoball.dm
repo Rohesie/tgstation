@@ -17,6 +17,8 @@
 	icon_state = "ethdisco_head_0"
 	anchored = TRUE
 	density = TRUE
+	light_system = STATIC_LIGHT
+	light_on = FALSE
 	var/TurnedOn = FALSE
 	var/current_color
 	var/TimerID
@@ -44,10 +46,11 @@
 /obj/structure/etherealball/proc/TurnOn()
 	TurnedOn = TRUE //Same
 	DiscoFever()
+	set_light_on(TurnedOn)
 
 /obj/structure/etherealball/proc/TurnOff()
 	TurnedOn = FALSE
-	set_light(0)
+	set_light_on(TurnedOn)
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
 	update_icon()
 	if(TimerID)
@@ -56,7 +59,7 @@
 /obj/structure/etherealball/proc/DiscoFever()
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
 	current_color = random_color()
-	set_light(range, power, current_color)
+	set_light_color(current_color)
 	add_atom_colour("#[current_color]", FIXED_COLOUR_PRIORITY)
 	update_icon()
 	TimerID = addtimer(CALLBACK(src, .proc/DiscoFever), 5, TIMER_STOPPABLE)  //Call ourselves every 0.5 seconds to change colors

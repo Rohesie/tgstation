@@ -3936,10 +3936,7 @@
 	},
 /area/abductor_ship)
 "kt" = (
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /turf/open/floor/plating/asteroid/snow/airless,
 /area/syndicate_mothership)
 "ku" = (
@@ -4629,10 +4626,7 @@
 /area/abductor_ship)
 "ma" = (
 /obj/structure/flora/grass/both,
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /turf/open/floor/plating/asteroid/snow/airless,
 /area/syndicate_mothership)
 "mb" = (
@@ -4889,10 +4883,7 @@
 /area/syndicate_mothership)
 "mC" = (
 /obj/item/disk/data,
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /turf/open/floor/plating/asteroid/snow/airless,
 /area/syndicate_mothership)
 "mD" = (
@@ -5190,10 +5181,7 @@
 /area/syndicate_mothership/control)
 "nh" = (
 /obj/item/toy/figure/syndie,
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /turf/open/floor/plating/asteroid/snow/airless,
 /area/syndicate_mothership)
 "ni" = (
@@ -6255,10 +6243,7 @@
 /area/centcom/holding)
 "oW" = (
 /obj/structure/flora/bush,
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /turf/open/floor/plating/asteroid/snow/airless,
 /area/syndicate_mothership)
 "oX" = (
@@ -6675,10 +6660,7 @@
 /area/syndicate_mothership/control)
 "pG" = (
 /obj/structure/flora/tree/pine,
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /turf/open/floor/plating/asteroid/snow/airless,
 /area/syndicate_mothership)
 "pH" = (
@@ -7271,10 +7253,7 @@
 /turf/open/floor/plasteel,
 /area/syndicate_mothership/control)
 "qM" = (
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /turf/open/floor/plating/asteroid/snow/airless,
 /area/syndicate_mothership/control)
 "qN" = (
@@ -7382,10 +7361,7 @@
 /area/centcom/ferry)
 "rd" = (
 /obj/structure/flora/grass/brown,
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /turf/open/floor/plating/asteroid/snow/airless,
 /area/syndicate_mothership)
 "re" = (
@@ -17253,10 +17229,7 @@
 /turf/open/floor/wood,
 /area/centcom/holding)
 "MD" = (
-/obj/effect/light_emitter{
-	set_cap = 1;
-	set_luminosity = 4
-	},
+/obj/effect/light_emitter/centcomm,
 /obj/structure/sign/warning/securearea{
 	desc = "A warning sign which reads 'FOURTH WALL'.";
 	name = "\improper FOURTH WALL";

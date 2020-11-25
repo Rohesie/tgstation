@@ -64,8 +64,10 @@
 	idle_power_usage = 100
 	active_power_usage = 1000
 	anchored = FALSE
+	light_system = STATIC_LIGHT
+	light_range = 0
 	light_power = 1.75
-	var/list/light_setting_list = list(0, 5, 10, 15)
+	var/static/list/light_setting_list = list(0, 3, 5, 7)
 	var/light_power_coefficient = 200
 	var/setting = FLOODLIGHT_OFF
 
@@ -89,7 +91,8 @@
 	active_power_usage = light_setting_list[setting] * light_power_coefficient
 	if(!avail(active_power_usage) && setting > FLOODLIGHT_OFF)
 		return change_setting(setting - 1)
-	set_light(light_setting_list[setting], light_power)
+	set_light_range(light_setting_list[setting])
+	set_light_on(TRUE)
 	var/setting_text = ""
 	if(setting > FLOODLIGHT_OFF)
 		icon_state = "[initial(icon_state)]_on"

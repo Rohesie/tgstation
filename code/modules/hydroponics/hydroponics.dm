@@ -8,6 +8,9 @@
 	obj_flags = CAN_BE_HIT | UNIQUE_RENAME
 	circuit = /obj/item/circuitboard/machine/hydroponics
 	idle_power_usage = 0
+	light_system = STATIC_LIGHT
+	light_range = 3
+	light_on = FALSE
 	///The amount of water in the tray (max 100)
 	var/waterlevel = 100
 	///The maximum amount of water in the tray
@@ -303,7 +306,8 @@
 			add_atom_colour(rgb(255, 175, 0), FIXED_COLOUR_PRIORITY)
 		else
 			add_overlay(mutable_appearance('icons/obj/hydroponics/equipment.dmi', "gaia_blessing"))
-		set_light(3)
+		set_light_range(3)
+		set_light_on(TRUE)
 
 	if(myseed)
 		update_icon_plant()
@@ -312,11 +316,11 @@
 	if(!self_sustaining)
 		if(myseed?.get_gene(/datum/plant_gene/trait/glow))
 			var/datum/plant_gene/trait/glow/G = myseed.get_gene(/datum/plant_gene/trait/glow)
-			set_light(G.glow_range(myseed), G.glow_power(myseed), G.glow_color)
+			SET_LIGHT_RANGE_POWER_COLOR(src, G.glow_range(myseed), G.glow_power(myseed), G.glow_color)
+			set_light_on(TRUE)
 		else
-			set_light(0)
+			set_light_on(FALSE)
 
-	return
 
 /obj/machinery/hydroponics/proc/update_icon_plant()
 	var/mutable_appearance/plant_overlay = mutable_appearance(myseed.growing_icon, layer = OBJ_LAYER + 0.01)

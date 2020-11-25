@@ -13,7 +13,6 @@
 	base_active_power_usage = 500
 	max_hardware_size = 4
 	steel_sheet_cost = 10
-	light_strength = 2
 	max_integrity = 300
 	integrity_failure = 0.5
 	var/console_department = "" // Used in New() to set network tag according to our area.

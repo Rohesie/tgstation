@@ -4,12 +4,13 @@
 	icon_state = "signpost"
 	anchored = TRUE
 	density = TRUE
+	light_system = STATIC_LIGHT
+	light_range = 2
 	var/question = "Travel back?"
 	var/list/zlevels
 
 /obj/structure/signpost/Initialize()
 	. = ..()
-	set_light(2)
 	zlevels = SSmapping.levels_by_trait(ZTRAIT_STATION)
 
 /obj/structure/signpost/interact(mob/user)

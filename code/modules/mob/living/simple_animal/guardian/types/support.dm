@@ -93,6 +93,7 @@
 	icon = 'icons/turf/floors.dmi'
 	desc = "A receiving zone for bluespace teleportations."
 	icon_state = "light_on-8"
+	light_system = STATIC_LIGHT
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	density = FALSE
 	anchored = TRUE

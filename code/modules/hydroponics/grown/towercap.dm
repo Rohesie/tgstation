@@ -152,7 +152,10 @@
 	desc = "For grilling, broiling, charring, smoking, heating, roasting, toasting, simmering, searing, melting, and occasionally burning things."
 	icon = 'icons/obj/hydroponics/equipment.dmi'
 	icon_state = "bonfire"
+	light_system = STATIC_LIGHT
+	light_range = 5
 	light_color = LIGHT_COLOR_FIRE
+	light_on = FALSE
 	density = FALSE
 	anchored = TRUE
 	buckle_lying = 0
@@ -236,7 +239,7 @@
 	if(!burning && CheckOxygen())
 		icon_state = burn_icon
 		burning = TRUE
-		set_light(6)
+		set_light_on(TRUE)
 		Burn()
 		START_PROCESSING(SSobj, src)
 
@@ -288,7 +291,7 @@
 	if(burning)
 		icon_state = "bonfire"
 		burning = 0
-		set_light(0)
+		set_light_on(FALSE)
 		STOP_PROCESSING(SSobj, src)
 
 /obj/structure/bonfire/buckle_mob(mob/living/M, force = FALSE, check_loc = TRUE)

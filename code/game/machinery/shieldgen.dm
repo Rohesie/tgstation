@@ -447,6 +447,7 @@
 	icon_state = "shieldwall"
 	density = TRUE
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF
+	light_system = STATIC_LIGHT
 	light_range = 3
 	var/needs_power = FALSE
 	var/obj/machinery/power/shieldwallgen/gen_primary

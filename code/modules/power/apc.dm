@@ -60,8 +60,10 @@
 	damage_deflection = 10
 	resistance_flags = FIRE_PROOF
 	interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON
+	light_system = STATIC_LIGHT
+	light_range = 1
+	light_on = FALSE
 
-	var/lon_range = 1.5
 	var/area/area
 	var/areastring = null
 	var/obj/item/stock_parts/cell/cell
@@ -340,12 +342,12 @@
 				set_light_color(LIGHT_COLOR_BLUE)
 			if(APC_FULLY_CHARGED)
 				set_light_color(LIGHT_COLOR_GREEN)
-		set_light(lon_range)
+		set_light_on(TRUE)
 	else if(update_state & UPSTATE_BLUESCREEN)
 		set_light_color(LIGHT_COLOR_BLUE)
-		set_light(lon_range)
+		set_light_on(TRUE)
 	else
-		set_light(0)
+		set_light_on(FALSE)
 
 	icon_update_needed = FALSE
 

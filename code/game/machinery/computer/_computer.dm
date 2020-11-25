@@ -9,7 +9,9 @@
 	max_integrity = 200
 	integrity_failure = 0.5
 	armor = list(MELEE = 0, BULLET = 0, LASER = 0, ENERGY = 0, BOMB = 0, BIO = 0, RAD = 0, FIRE = 40, ACID = 20)
-	var/brightness_on = 1
+	light_system = STATIC_LIGHT
+	light_range = 1
+	light_on = FALSE
 	var/icon_keyboard = "generic_key"
 	var/icon_screen = "generic"
 	var/time_to_screwdrive = 20
@@ -47,9 +49,9 @@
 /obj/machinery/computer/power_change()
 	. = ..()
 	if(machine_stat & NOPOWER)
-		set_light(0)
+		set_light_on(FALSE)
 	else
-		set_light(brightness_on)
+		set_light_on(TRUE)
 
 /obj/machinery/computer/screwdriver_act(mob/living/user, obj/item/I)
 	if(..())
@@ -76,7 +78,7 @@
 	. = ..()
 	if(.)
 		playsound(loc, 'sound/effects/glassbr3.ogg', 100, TRUE)
-		set_light(0)
+		set_light_on(FALSE)
 
 /obj/machinery/computer/emp_act(severity)
 	. = ..()

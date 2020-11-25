@@ -452,16 +452,18 @@ structure_check() searches for nearby cultist structures required for the invoca
 		set_light_color(LIGHT_COLOR_FIRE)
 		desc += "<br><b>A tear in reality reveals a coursing river of lava... something recently teleported here from the Lavaland Mines!</b>"
 	outer_portal = new(T, 600, color)
-	light_range = 4
-	update_light()
+	set_light_range(4)
+	//light_range = 4
+	//update_light()
 	addtimer(CALLBACK(src, .proc/close_portal), 600, TIMER_UNIQUE)
 
 /obj/effect/rune/teleport/proc/close_portal()
 	qdel(inner_portal)
 	qdel(outer_portal)
 	desc = initial(desc)
-	light_range = 0
-	update_light()
+	set_light_range(0)
+	//light_range = 0
+	//update_light()
 
 //Ritual of Dimensional Rending: Calls forth the avatar of Nar'Sie upon the station.
 /obj/effect/rune/narsie
@@ -693,7 +695,11 @@ structure_check() searches for nearby cultist structures required for the invoca
 	invocation = "Dedo ol'btoh!"
 	icon_state = "4"
 	color = RUNE_COLOR_BURNTORANGE
+	light_system = STATIC_LIGHT
+	light_range = 6
+	light_power = 1
 	light_color = LIGHT_COLOR_LAVA
+	light_on = FALSE
 	req_cultists = 3
 	invoke_damage = 10
 	construct_invoke = FALSE
@@ -711,7 +717,8 @@ structure_check() searches for nearby cultist structures required for the invoca
 	var/turf/T = get_turf(src)
 	visible_message("<span class='warning'>[src] turns a bright, glowing orange!</span>")
 	color = "#FC9B54"
-	set_light(6, 1, color)
+	set_light_color(color)
+	set_light_on(TRUE)
 	for(var/mob/living/L in viewers(T))
 		if(!iscultist(L) && L.blood_volume)
 			var/atom/I = L.anti_magic_check(chargecost = 0)
@@ -739,7 +746,8 @@ structure_check() searches for nearby cultist structures required for the invoca
 	qdel(src)
 
 /obj/effect/rune/blood_boil/proc/do_area_burn(turf/T, multiplier)
-	set_light(6, 1, color)
+	set_light_color(color)
+	set_light_on(TRUE)
 	for(var/mob/living/L in viewers(T))
 		if(!iscultist(L) && L.blood_volume)
 			if(L.anti_magic_check(chargecost = 0))

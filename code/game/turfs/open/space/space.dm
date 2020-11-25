@@ -15,6 +15,7 @@
 	var/static/datum/gas_mixture/immutable/space/space_gas = new
 	plane = PLANE_SPACE
 	layer = SPACE_LAYER
+	light_range = 2
 	light_power = 0.25
 	dynamic_lighting = DYNAMIC_LIGHTING_DISABLED
 	bullet_bounce_sound = null
@@ -57,8 +58,9 @@
 	if(requires_activation)
 		SSair.add_to_active(src)
 
-	if (light_system == STATIC_LIGHT && light_power && light_range)
-		update_light()
+	if (light_system == STATIC_LIGHT)
+		AddComponent(/datum/component/static_lighting)
+		//update_light()
 
 	if (opacity)
 		directional_opacity = ALL_CARDINALS
@@ -100,7 +102,21 @@
 	return null
 
 /turf/open/space/proc/update_starlight()
-	if(CONFIG_GET(flag/starlight))
+	if(!CONFIG_GET(flag/starlight))
+		return
+	var/has_neighbors_to_shine_on = FALSE
+	for(var/turf/neighbor in orange(1, src))
+		if(isspaceturf(neighbor))
+			continue
+		if(!IS_DYNAMIC_LIGHTING(neighbor))
+			continue
+		has_neighbors_to_shine_on = TRUE
+		break
+	if(!has_neighbors_to_shine_on)
+		set_light_system(NO_LIGHT_SUPPORT)
+		return
+	set_light_system(STATIC_LIGHT)
+	/*
 		for(var/t in RANGE_TURFS(1,src)) //RANGE_TURFS is in code\__HELPERS\game.dm
 			if(isspaceturf(t))
 				//let's NOT update this that much pls
@@ -108,6 +124,7 @@
 			set_light(2)
 			return
 		set_light(0)
+	*/
 
 /turf/open/space/attack_paw(mob/user)
 	return attack_hand(user)

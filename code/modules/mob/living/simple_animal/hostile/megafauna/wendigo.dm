@@ -192,10 +192,7 @@ Difficulty: Hard
 /mob/living/simple_animal/hostile/megafauna/wendigo/death(gibbed, list/force_grant)
 	if(health > 0)
 		return
-	var/obj/effect/portal/permanent/one_way/exit = new /obj/effect/portal/permanent/one_way(starting)
-	exit.id = "wendigo arena exit"
-	exit.add_atom_colour(COLOR_RED_LIGHT, ADMIN_COLOUR_PRIORITY)
-	exit.set_light(20, 1, COLOR_SOFT_RED)
+	new /obj/effect/portal/permanent/one_way/wendigo(starting)
 	return ..()
 
 /obj/item/wendigo_blood

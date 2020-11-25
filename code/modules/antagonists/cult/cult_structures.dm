@@ -14,9 +14,9 @@
 	visible_message("<span class='danger'>[src] fades away.</span>")
 	invisibility = INVISIBILITY_OBSERVER
 	alpha = 100 //To help ghosts distinguish hidden runes
-	light_range = 0
-	light_power = 0
-	update_light()
+	set_light_range(0)
+	set_light_power(0)
+	//update_light()
 	STOP_PROCESSING(SSfastprocess, src)
 
 /obj/structure/destructible/cult/proc/reveal() //for spells that reveal cult presence
@@ -24,9 +24,9 @@
 	invisibility = 0
 	visible_message("<span class='danger'>[src] suddenly appears!</span>")
 	alpha = initial(alpha)
-	light_range = initial(light_range)
-	light_power = initial(light_power)
-	update_light()
+	set_light_range(initial(light_range))
+	set_light_power(initial(light_power))
+	//update_light()
 	START_PROCESSING(SSfastprocess, src)
 
 
@@ -129,6 +129,7 @@
 	desc = "A forge used in crafting the unholy weapons used by the armies of Nar'Sie."
 	cultist_examine_message = "A blood cultist can use it to create shielded robes, flagellant's robes, and mirror shields."
 	icon_state = "forge"
+	light_system = STATIC_LIGHT
 	light_range = 2
 	light_color = LIGHT_COLOR_LAVA
 	break_message = "<span class='warning'>The force breaks apart into shards with a howling scream!</span>"
@@ -174,7 +175,8 @@
 	name = "pylon"
 	desc = "A floating crystal that slowly heals those faithful to Nar'Sie."
 	icon_state = "pylon"
-	light_range = 1.5
+	light_system = STATIC_LIGHT
+	light_range = 2
 	light_color = COLOR_SOFT_RED
 	break_sound = 'sound/effects/glassbr2.ogg'
 	break_message = "<span class='warning'>The blood-red crystal falls to the floor and shatters!</span>"
@@ -250,7 +252,8 @@
 	desc = "A desk covered in arcane manuscripts and tomes in unknown languages. Looking at the text makes your skin crawl."
 	cultist_examine_message = "A blood cultist can use it to create zealot's blindfolds, shuttle curse orbs, and veil walker equipment."
 	icon_state = "tomealtar"
-	light_range = 1.5
+	light_system = STATIC_LIGHT
+	light_range = 2
 	light_color = LIGHT_COLOR_FIRE
 	break_message = "<span class='warning'>The books and tomes of the archives burn into ash as the desk shatters!</span>"
 

@@ -18,6 +18,7 @@
 	layer = MASSIVE_OBJ_LAYER
 	light_color = COLOR_RED
 	light_power = 0.7
+	light_system = MOVABLE_LIGHT
 	light_range = 15
 	light_range = 6
 	move_resist = INFINITY

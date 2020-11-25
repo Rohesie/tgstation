@@ -1,3 +1,18 @@
+///Updates the lighting system, cleaning up and adding components as needed.
+/atom/proc/set_light_system(new_system)
+	if(light_system == new_system)
+		return
+	SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT_SYSTEM, new_system)
+	. = light_system
+	light_system = new_system
+	switch(light_system)
+		if(STATIC_LIGHT)
+			AddComponent(/datum/component/static_lighting)
+		if(MOVABLE_LIGHT)
+			AddComponent(/datum/component/overlay_lighting)
+		if(MOVABLE_LIGHT_DIRECTIONAL)
+			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE)
+
 
 // The proc you should always use to set the light of this atom.
 // Nonesensical value for l_color default, so we can detect if it gets set to null.
@@ -19,7 +34,7 @@
 
 	SEND_SIGNAL(src, COMSIG_ATOM_SET_LIGHT, l_range, l_power, l_color, l_on)
 
-	update_light()
+	//update_light()
 
 #undef NONSENSICAL_VALUE
 
@@ -78,7 +93,7 @@
 		return
 	recalculate_directional_opacity()
 
-
+/*
 /atom/movable/Moved(atom/OldLoc, Dir)
 	. = ..()
 	var/datum/light_source/L
@@ -86,7 +101,7 @@
 	for (thing in light_sources) // Cycle through the light sources on this atom and tell them to update.
 		L = thing
 		L.source_atom.update_light()
-
+*/
 
 /atom/proc/flash_lighting_fx(_range = FLASH_LIGHT_RANGE, _power = FLASH_LIGHT_POWER, _color = COLOR_WHITE, _duration = FLASH_LIGHT_DURATION)
 	return

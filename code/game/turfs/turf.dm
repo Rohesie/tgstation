@@ -108,7 +108,8 @@ GLOBAL_LIST_EMPTY(station_turfs)
 		SSair.add_to_active(src)
 
 	if (light_power && light_range)
-		update_light()
+		AddComponent(/datum/component/static_lighting)
+		//update_light()
 
 	var/turf/T = SSmapping.get_turf_above(src)
 	if(T)

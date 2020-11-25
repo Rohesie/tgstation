@@ -40,6 +40,8 @@
 	attack_verb_continuous = "slashes"
 	attack_verb_simple = "slash"
 	attack_sound = 'sound/weapons/blade1.ogg'
+	light_system = MOVABLE_LIGHT
+	light_range = 2
 	var/obj/effect/light_emitter/red_energy_sword/sord
 
 	footstep_type = FOOTSTEP_MOB_SHOE
@@ -64,10 +66,6 @@
 /mob/living/simple_animal/hostile/pirate/melee/Destroy()
 	QDEL_NULL(sord)
 	return ..()
-
-/mob/living/simple_animal/hostile/pirate/melee/Initialize()
-	. = ..()
-	set_light(2)
 
 /mob/living/simple_animal/hostile/pirate/ranged
 	name = "Pirate Gunner"

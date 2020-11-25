@@ -116,6 +116,9 @@ but only permamently removed with the curator's soapstone.
 	density = FALSE
 	anchored = TRUE
 	max_integrity = 30
+	light_system = STATIC_LIGHT
+	light_range = 1
+	light_on = FALSE
 
 	var/hidden_message
 	var/creator_key
@@ -152,7 +155,7 @@ but only permamently removed with the curator's soapstone.
 	var/newcolor = copytext_char(hash, 1, 7)
 	add_atom_colour("#[newcolor]", FIXED_COLOUR_PRIORITY)
 	set_light_color("#[newcolor]")
-	set_light(1)
+	set_light_on(TRUE)
 
 /obj/structure/chisel_message/proc/pack()
 	var/list/data = list()

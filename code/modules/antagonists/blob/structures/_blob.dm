@@ -2,6 +2,7 @@
 /obj/structure/blob
 	name = "blob"
 	icon = 'icons/mob/blob.dmi'
+	light_system = STATIC_LIGHT
 	light_range = 2
 	desc = "A thick wall of writhing tendrils."
 	density = FALSE //this being false causes two bugs, being able to attack blob tiles behind other blobs and being unable to move on blob tiles in no gravity, but turning it to 1 causes the blob mobs to be unable to path through blobs, which is probably worse.
@@ -325,6 +326,7 @@
 /obj/structure/blob/normal
 	name = "normal blob"
 	icon_state = "blob"
+	light_system = NO_LIGHT_SUPPORT
 	light_range = 0
 	obj_integrity = 21 //doesn't start at full health
 	max_integrity = 25

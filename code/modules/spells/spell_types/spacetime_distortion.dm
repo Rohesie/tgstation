@@ -49,7 +49,7 @@
 		STD0.add_overlay(T1.photograph())
 		STD1.linked_dist = STD0
 		STD1.add_overlay(T0.photograph())
-		STD1.set_light(4, 30, "#c9fff5")
+		STD1.set_light_on(TRUE)
 		effects += STD0
 		effects += STD1
 
@@ -69,6 +69,11 @@
 	name = "spacetime distortion"
 	desc = "A distortion in spacetime. You can hear faint music..."
 	icon_state = ""
+	light_system = MOVABLE_LIGHT
+	light_range = 4
+	light_power = 30
+	light_color = COLOR_SPACETIMEDISTORTION_GREEN
+	light_on = FALSE
 	var/obj/effect/cross_action/spacetime_dist/linked_dist
 	var/busy = FALSE
 	var/sound

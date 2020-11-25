@@ -16,6 +16,9 @@
 	armor = list(MELEE = 50, BULLET = 20, LASER = 20, ENERGY = 20, BOMB = 0, BIO = 0, RAD = 0, FIRE = 90, ACID = 50)
 	max_integrity = 100
 	integrity_failure = 0.5
+	light_system = STATIC_LIGHT
+	light_range = AI_CAMERA_LUMINOSITY
+	light_on = FALSE
 	var/default_camera_icon = "camera" //the camera's base icon used by update_icon - icon_state is primarily used for mapping display purposes.
 	var/list/network = list("ss13")
 	var/c_tag = null
@@ -48,6 +51,7 @@
 	network = list("rd","toxins")
 	use_power = NO_POWER_USE //Test site is an unpowered area
 	invuln = TRUE
+	light_system = STATIC_LIGHT
 	light_range = 10
 	start_active = TRUE
 
@@ -146,7 +150,7 @@
 			network = list()
 			GLOB.cameranet.removeCamera(src)
 			set_machine_stat(machine_stat | EMPED)
-			set_light(0)
+			set_light_on(FALSE)
 			emped = emped+1  //Increase the number of consecutive EMP's
 			update_icon()
 			addtimer(CALLBACK(src, .proc/post_emp_reset, emped, network), 90 SECONDS)
@@ -397,7 +401,7 @@
 		else
 			myarea = null
 	else
-		set_light(0)
+		set_light_on(FALSE)
 		GLOB.cameranet.removeCamera(src)
 		if (isarea(myarea))
 			LAZYREMOVE(myarea.cameras, src)
@@ -458,10 +462,8 @@
 		for(var/obj/machinery/camera/cam in A.lit_cameras)
 			if(cam == src)
 				return
-	if(on)
-		set_light(AI_CAMERA_LUMINOSITY)
-	else
-		set_light(0)
+	set_light_on(on)
+
 
 /obj/machinery/camera/get_remote_view_fullscreens(mob/user)
 	if(view_range == short_range) //unfocused

@@ -1,3 +1,6 @@
+/// Number of pixels in the horiontal and vertical axis of the common tile.
+#define WORLD_ICON_SIZE 32
+
 //This file is just for the necessary /world definition
 //Try looking in game/world.dm
 
@@ -19,6 +22,7 @@
 	hub_password = "kMZy3U5jJHSiBQjr"
 	name = "/tg/ Station 13"
 	fps = 20
+	icon_size = WORLD_ICON_SIZE
 #ifdef FIND_REF_NO_CHECK_TICK
 	loop_checks = FALSE
 #endif

@@ -13,7 +13,7 @@
 	steel_sheet_cost = 1
 	slot_flags = ITEM_SLOT_ID | ITEM_SLOT_BELT
 	has_light = TRUE //LED flashlight!
-	comp_light_luminosity = 2.3 //Same as the PDA
+	light_range = 1
 	looping_sound = FALSE
 	var/has_variants = TRUE
 	var/finish_color = null
@@ -33,13 +33,13 @@
 	icon_state_menu = "assign"
 	w_class = WEIGHT_CLASS_SMALL
 	slot_flags = ITEM_SLOT_ID | ITEM_SLOT_BELT
-	comp_light_luminosity = 6.3
+	light_range = 5
 	has_variants = FALSE
 
 /// Given to Nuke Ops members.
 /obj/item/modular_computer/tablet/nukeops
 	icon_state = "tablet-syndicate"
-	comp_light_luminosity = 6.3
+	light_range = 5
 	has_variants = FALSE
 	device_theme = "syndicate"
 	light_color = COLOR_RED
@@ -56,7 +56,8 @@
 	name = "modular interface"
 	icon_state = "tablet-silicon"
 	has_light = FALSE //tablet light button actually enables/disables the borg lamp
-	comp_light_luminosity = 0
+	light_system = NO_LIGHT_SUPPORT
+	light_range = 0
 	has_variants = FALSE
 	///Ref to the borg we're installed in. Set by the borg during our creation.
 	var/mob/living/silicon/robot/borgo

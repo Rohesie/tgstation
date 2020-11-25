@@ -273,6 +273,7 @@
 	move_resist = MOVE_FORCE_EXTREMELY_STRONG
 	anchored = TRUE
 	density = FALSE
+	light_system = STATIC_LIGHT
 	light_range = 4
 	light_color = COLOR_SOFT_RED
 	var/mob/living/simple_animal/hostile/asteroid/elite/legionnaire/myowner = null

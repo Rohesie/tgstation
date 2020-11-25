@@ -118,7 +118,5 @@
 	attack_verb_simple = "blast"
 	attack_sound = 'sound/weapons/sonic_jackhammer.ogg'
 	loot = list(/obj/effect/decal/remains/plasma, /obj/item/pickaxe/drill/jackhammer)
-
-/mob/living/simple_animal/hostile/skeleton/plasmaminer/Initialize()
-	. = ..()
-	set_light(2)
+	light_system = MOVABLE_LIGHT
+	light_range = 2

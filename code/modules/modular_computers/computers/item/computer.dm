@@ -10,6 +10,9 @@
 	integrity_failure = 0.5
 	max_integrity = 100
 	armor = list(MELEE = 0, BULLET = 20, LASER = 20, ENERGY = 100, BOMB = 0, BIO = 100, RAD = 100, FIRE = 0, ACID = 0)
+	light_system = MOVABLE_LIGHT_DIRECTIONAL
+	light_range = 2
+	light_on = FALSE
 
 	var/enabled = 0											// Whether the computer is turned on.
 	var/screen_on = 1										// Whether the computer is active/opened/it's screen is on.
@@ -49,8 +52,6 @@
 	var/list/idle_threads							// Idle programs on background. They still receive process calls but can't be interacted with.
 	var/obj/physical = null									// Object that represents our computer. It's used for Adjacent() and UI visibility checks.
 	var/has_light = FALSE						//If the computer has a flashlight/LED light/what-have-you installed
-	var/comp_light_luminosity = 3				//The brightness of that light
-	var/comp_light_color			//The color of that light
 
 
 /obj/item/modular_computer/Initialize()
@@ -58,7 +59,6 @@
 	START_PROCESSING(SSobj, src)
 	if(!physical)
 		physical = src
-	comp_light_color = "#FFFFFF"
 	idle_threads = list()
 	if(looping_sound)
 		soundloop = new(list(src), enabled)
@@ -391,10 +391,6 @@
 	if(!has_light)
 		return FALSE
 	set_light_on(!light_on)
-	if(light_on)
-		set_light(comp_light_luminosity, 1, comp_light_color)
-	else
-		set_light(0)
 	return TRUE
 
 /**
@@ -408,9 +404,8 @@
 /obj/item/modular_computer/proc/set_flashlight_color(color)
 	if(!has_light || !color)
 		return FALSE
-	comp_light_color = color
 	set_light_color(color)
-	update_light()
+	//update_light()
 	return TRUE
 
 /obj/item/modular_computer/screwdriver_act(mob/user, obj/item/tool)

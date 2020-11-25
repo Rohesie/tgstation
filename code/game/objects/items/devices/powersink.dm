@@ -18,6 +18,9 @@
 	throw_speed = 1
 	throw_range = 2
 	custom_materials = list(/datum/material/iron=750)
+	light_system = STATIC_LIGHT
+	light_range = 5
+	light_on = FALSE
 	var/drain_rate = 2000000	// amount of power to drain per tick
 	var/power_drained = 0 		// has drained this much power
 	var/max_power = 6e8		// maximum power that can be drained before exploding
@@ -58,7 +61,8 @@
 
 	mode = value
 	update_icon()
-	set_light(0)
+	set_light_on(FALSE)
+
 
 /obj/item/powersink/attackby(obj/item/I, mob/user, params)
 	if(I.tool_behaviour == TOOL_WRENCH)
@@ -127,7 +131,7 @@
 
 	var/datum/powernet/PN = attached.powernet
 	if(PN)
-		set_light(5)
+		set_light_on(TRUE)
 
 		// found a powernet, so drain up to max power from it
 

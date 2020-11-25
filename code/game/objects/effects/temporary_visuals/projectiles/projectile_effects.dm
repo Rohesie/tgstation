@@ -52,9 +52,12 @@
 		pixel_y += round((cos(angle_override)+16*cos(angle_override)*2), 1)
 
 /obj/effect/projectile_lighting
+	light_system = STATIC_LIGHT
+	light_on = FALSE
 	var/owner
 
 /obj/effect/projectile_lighting/Initialize(mapload, color, range, intensity, owner_key)
 	. = ..()
-	set_light(range, intensity, color)
+	SET_LIGHT_RANGE_POWER_COLOR(src, range, intensity, color)
+	set_light_on(TRUE)
 	owner = owner_key

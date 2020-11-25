@@ -22,6 +22,9 @@
 	head_icon = 'icons/mob/pai_item_head.dmi'
 	radio = /obj/item/radio/headset/silicon/pai
 	can_buckle_to = FALSE
+	light_system = MOVABLE_LIGHT
+	light_range = 5
+	light_on = FALSE
 	var/network = "ss13"
 	var/obj/machinery/camera/current = null
 
@@ -84,7 +87,7 @@
 	var/overload_bulletblock = 0	//Why is this a good idea?
 	var/overload_maxhealth = 0
 	var/silent = FALSE
-	var/brightness_power = 5
+
 
 /mob/living/silicon/pai/add_sensors() //pAIs have to buy their HUDs
 	return

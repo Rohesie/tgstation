@@ -202,15 +202,15 @@
 	icon = 'icons/obj/smooth_structures/alien/weednode.dmi'
 	icon_state = "weednode-0"
 	base_icon_state = "weednode"
-	light_color = LIGHT_COLOR_BLUE
+	light_system = STATIC_LIGHT
+	light_range = 4
 	light_power = 0.5
-	var/lon_range = 4
+	light_color = LIGHT_COLOR_BLUE
 	var/node_range = NODERANGE
 
 
 /obj/structure/alien/weeds/node/Initialize()
 	. = ..()
-	set_light(lon_range)
 	var/obj/structure/alien/weeds/W = locate(/obj/structure/alien/weeds) in loc
 	if(W && W != src)
 		qdel(W)

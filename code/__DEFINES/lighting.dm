@@ -7,6 +7,11 @@
 ///Light made by masking the lighting darkness plane, and is directional.
 #define MOVABLE_LIGHT_DIRECTIONAL 3
 
+///For switchable lights, is it on and currently emitting light?
+#define LIGHTING_ON (1<<0)
+///Is the parent attached to something else, its loc? Then we need to keep an eye of this.
+#define LIGHTING_ATTACHED (1<<1)
+
 ///Is a movable light source attached to another movable (its loc), meaning that the lighting component should go one level deeper.
 #define LIGHT_ATTACHED (1<<0)
 
@@ -14,7 +19,7 @@
 /// frequency, in 1/10ths of a second, of the lighting process
 #define LIGHTING_INTERVAL       5
 
-#define MINIMUM_USEFUL_LIGHT_RANGE 1.4
+#define MINIMUM_USEFUL_LIGHT_RANGE 1
 
 /// type of falloff to use for lighting; 1 for circular, 2 for square
 #define LIGHTING_FALLOFF        1
@@ -103,3 +108,5 @@ do { \
 		source.lum_b = 1; \
 	}; \
 } while (FALSE)
+
+#define SET_LIGHT_RANGE_POWER_COLOR(source, _range, _power, _color) source.set_light_range(_range); source.set_light_power(_power); source.set_light_color(_color);

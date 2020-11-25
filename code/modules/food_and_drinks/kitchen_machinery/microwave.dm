@@ -12,8 +12,11 @@
 	active_power_usage = 100
 	circuit = /obj/item/circuitboard/machine/microwave
 	pass_flags = PASSTABLE
-	light_color = LIGHT_COLOR_YELLOW
+	light_system = STATIC_LIGHT
+	light_range = 1
 	light_power = 3
+	light_color = LIGHT_COLOR_YELLOW
+	light_on = FALSE
 	var/wire_disabled = FALSE // is its internal wire cut?
 	var/operating = FALSE
 	var/dirty = 0 // 0 to 100 // Does it need cleaning?
@@ -261,7 +264,7 @@
 	visible_message("<span class='notice'>\The [src] turns on.</span>", null, "<span class='hear'>You hear a microwave humming.</span>")
 	operating = TRUE
 
-	set_light(1.5)
+	set_light_on(TRUE)
 	soundloop.start()
 	update_icon()
 
@@ -356,7 +359,7 @@
 	after_finish_loop()
 
 /obj/machinery/microwave/proc/after_finish_loop()
-	set_light(0)
+	set_light_on(FALSE)
 	soundloop.stop()
 	update_icon()
 

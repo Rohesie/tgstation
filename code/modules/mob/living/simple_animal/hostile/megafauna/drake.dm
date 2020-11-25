@@ -238,12 +238,13 @@
 	adjustBruteLoss(-250) // yeah you're gonna pay for that, don't run nerd
 	add_atom_colour(rgb(255, 255, 0), TEMPORARY_COLOUR_PRIORITY)
 	move_to_delay = move_to_delay / 2
-	light_range = 10
+	set_light_range(7)
+	set_light_system(MOVABLE_LIGHT)
 	SLEEP_CHECK_DEATH(10) // run.
 	mass_fire(20, 15, 3)
 	move_to_delay = initial(move_to_delay)
 	remove_atom_colour(TEMPORARY_COLOUR_PRIORITY)
-	light_range = initial(light_range)
+	set_light_range(initial(light_range))
 
 /mob/living/simple_animal/hostile/megafauna/dragon/proc/fire_cone(atom/at = target, meteors = TRUE)
 	playsound(get_turf(src),'sound/magic/fireball.ogg', 200, TRUE)
@@ -419,6 +420,7 @@
 /obj/effect/temp_visual/lava_warning
 	icon_state = "lavastaff_warn"
 	layer = BELOW_MOB_LAYER
+	light_system = MOVABLE_LIGHT
 	light_range = 2
 	duration = 13
 
@@ -467,6 +469,7 @@
 	icon = 'icons/obj/hand_of_god_structures.dmi'
 	icon_state = "trap-earth"
 	layer = BELOW_MOB_LAYER
+	light_system = MOVABLE_LIGHT
 	light_range = 2
 	duration = 13
 
@@ -535,6 +538,7 @@
 	icon = 'icons/mob/actions/actions_items.dmi'
 	icon_state = "sniper_zoom"
 	layer = BELOW_MOB_LAYER
+	light_system = MOVABLE_LIGHT
 	light_range = 2
 	duration = 9
 

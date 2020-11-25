@@ -117,8 +117,8 @@ All ShuttleMove procs go here
 	if (newT.z != oldT.z)
 		onTransitZ(oldT.z, newT.z)
 
-	if(light)
-		update_light()
+	//if(light)
+	//	update_light()
 	if(rotation)
 		shuttleRotate(rotation)
 	if(proximity_monitor)

@@ -326,6 +326,7 @@ This section is for the destabilized SM
 	density = TRUE
 	anchored = TRUE
 	flags_1 = PREVENT_CONTENTS_EXPLOSION_1
+	light_system = STATIC_LIGHT
 	light_range = 4
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	///If not active the crystal will not emit radiations and gases
@@ -510,6 +511,7 @@ This section is for the crystal portals variations
 	icon_state = "anom"
 	color = COLOR_SILVER
 	anchored = TRUE
+	light_system = STATIC_LIGHT
 	light_range = 3
 	resistance_flags = INDESTRUCTIBLE | LAVA_PROOF | FIRE_PROOF | UNACIDABLE | ACID_PROOF | FREEZE_PROOF
 	///Max amount of mobs that a portal can spawn in any given time
