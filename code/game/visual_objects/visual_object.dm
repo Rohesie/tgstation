@@ -2,6 +2,7 @@
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	vis_flags = VIS_INHERIT_PLANE
 	move_resist = INFINITY
+	anchored = TRUE
 
 /atom/movable/vis_obj/fire_act(exposed_temperature, exposed_volume)
 	return
@@ -23,6 +24,15 @@
 
 /atom/movable/vis_obj/singularity_act()
 	return
+
+/atom/movable/vis_obj/onTransitZ()
+	return
+
+/atom/movable/vis_obj/wash(clean_types)
+	return
+
+/atom/movable/vis_obj/onShuttleMove()
+	return FALSE
 
 /atom/movable/vis_obj/abstract/singularity_pull()
 	return

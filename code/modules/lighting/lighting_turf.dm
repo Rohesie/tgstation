@@ -78,6 +78,19 @@
 
 	return !(lighting_object.luminosity || dynamic_lumcount)
 
+/**
+  * Updates the turf's directional_opacity value.
+  *
+  * This exists to act as a hook for associated behavior.
+  * It notifies (potentially) affected light sources so they can update (if needed).
+  */
+/turf/proc/set_directional_opacity(new_directional_opacity)
+	if(directional_opacity == new_directional_opacity)
+		return
+	. = directional_opacity
+	directional_opacity = new_directional_opacity
+	SEND_SIGNAL(src, COMSIG_TURF_POST_SET_DIRECTIONAL_OPACITY, .)
+
 
 ///Proc to add movable sources of opacity on the turf and let it handle lighting code.
 /turf/proc/add_opacity_source(atom/movable/new_source)
@@ -99,17 +112,17 @@
 /turf/proc/recalculate_directional_opacity()
 	. = directional_opacity
 	if(opacity)
-		directional_opacity = ALL_CARDINALS
+		set_directional_opacity(ALL_CARDINALS)
 		if(. != directional_opacity)
 			reconsider_lights()
 		return
-	directional_opacity = NONE
+	set_directional_opacity(NONE)
 	for(var/am in opacity_sources)
 		var/atom/movable/opacity_source = am
 		if(opacity_source.flags_1 & ON_BORDER_1)
 			directional_opacity |= opacity_source.dir
 		else //If fulltile and opaque, then the whole tile blocks view, no need to continue checking.
-			directional_opacity = ALL_CARDINALS
+			set_directional_opacity(ALL_CARDINALS)
 			break
 	if(. != directional_opacity && (. == ALL_CARDINALS || directional_opacity == ALL_CARDINALS))
 		reconsider_lights() //The lighting system only cares whether the tile is fully concealed from all directions or not.

@@ -126,6 +126,7 @@ All ShuttleMove procs go here
 
 	update_parallax_contents()
 
+	SEND_SIGNAL(src, COMSIG_MOVABLE_POST_AFTERSHUTTLEMOVE, oldT, movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
 	return TRUE
 
 /atom/movable/proc/lateShuttleMove(turf/oldT, list/movement_force, move_dir)

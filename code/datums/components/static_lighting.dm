@@ -1,7 +1,6 @@
 #define LIGHT_POWER_MULTIPLIER 240
 
 GLOBAL_LIST_EMPTY(lighting_shadows_cache)
-GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 
 /datum/component/static_lighting
 	///How far the light reaches, integer.
@@ -53,7 +52,7 @@ GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_COLOR, .proc/set_color)
 	RegisterSignal(parent, COMSIG_ATOM_SET_LIGHT_ON, .proc/on_toggle)
 	if(ismovable(parent))
-		RegisterSignal(parent, COMSIG_MOVABLE_MOVED, .proc/on_parent_moved)
+		RegisterSignal(parent, list(COMSIG_MOVABLE_MOVED, COMSIG_MOVABLE_POST_AFTERSHUTTLEMOVE), .proc/on_parent_moved)
 	var/atom/atom_parent = parent
 	if(atom_parent.light_on)
 		turn_on()
@@ -67,6 +66,7 @@ GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 		COMSIG_ATOM_SET_LIGHT_COLOR,
 		COMSIG_ATOM_SET_LIGHT_ON,
 		COMSIG_MOVABLE_MOVED,
+		COMSIG_MOVABLE_POST_AFTERSHUTTLEMOVE,
 		))
 	if(static_lighting_flags & LIGHTING_ON)
 		turn_off()
@@ -76,6 +76,7 @@ GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 
 /datum/component/static_lighting/Destroy()
 	set_epicenter(null)
+	qdel(light_object, force = TRUE)
 	light_object = null
 	return ..()
 
@@ -91,6 +92,7 @@ GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 	for(var/t in affected_turfs)
 		var/turf/lit_turf = t
 		lit_turf.dynamic_lumcount -= lum_power
+		UnregisterSignal(lit_turf, COMSIG_TURF_POST_SET_DIRECTIONAL_OPACITY)
 	affected_turfs = null
 
 
@@ -102,6 +104,7 @@ GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 	for(var/turf/lit_turf in oview(range, epicenter))
 		lit_turf.dynamic_lumcount += lum_power
 		LAZYADD(affected_turfs, lit_turf)
+		RegisterSignal(lit_turf, COMSIG_TURF_POST_SET_DIRECTIONAL_OPACITY, .proc/on_turf_directional_opacity_change)
 		if(IS_OPAQUE_TURF(lit_turf))
 			. += lit_turf
 
@@ -119,64 +122,11 @@ GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 		var/y_offset = blocker.y - epicenter.y
 		if(range >= 6 && abs(x_offset) >= range - 1 && abs(x_offset) == abs(y_offset))
 			continue //Large ranges skip making shadows for the corner edges, which are already obscured by the base image.
-
-		var/blocker_to_light_dir = get_dir(epicenter, blocker)
-		var/blocking_dirs = NONE
-		if(ISDIAGONALDIR(blocker_to_light_dir))
-			var/dir_to_check = blocker_to_light_dir & (NORTH|SOUTH)
-			var/turf/blocker_neighbor = get_step(blocker, dir_to_check)
-			if(blocker_neighbor && IS_OPAQUE_TURF(blocker_neighbor)) //N-S component first.
-				blocking_dirs |= dir_to_check
-			else //If N-S blocks light, then the inverse of the E-W component is obscured. If not, let's check it.
-				dir_to_check = DIRFLIP(blocker_to_light_dir & (EAST|WEST))
-				blocker_neighbor = get_step(blocker, dir_to_check)
-				if(blocker_neighbor && IS_OPAQUE_TURF(blocker_neighbor))
-					blocking_dirs |= dir_to_check
-			dir_to_check = blocker_to_light_dir & (EAST|WEST)
-			blocker_neighbor = get_step(blocker, dir_to_check)
-			if(blocker_neighbor && IS_OPAQUE_TURF(blocker_neighbor))
-				blocking_dirs |= dir_to_check
-			else
-				dir_to_check = DIRFLIP(blocker_to_light_dir & (NORTH|SOUTH))
-				blocker_neighbor = get_step(blocker, dir_to_check)
-				if(blocker_neighbor && IS_OPAQUE_TURF(blocker_neighbor))
-					blocking_dirs |= dir_to_check
-		else
-			var/dir_to_check = turn(blocker_to_light_dir, 90)
-			var/turf/blocker_neighbor = get_step(blocker, dir_to_check)
-			if(blocker_neighbor && IS_OPAQUE_TURF(blocker_neighbor))
-				blocking_dirs |= dir_to_check
-			dir_to_check = turn(blocker_to_light_dir, -90)
-			blocker_neighbor = get_step(blocker, dir_to_check)
-			if(blocker_neighbor && IS_OPAQUE_TURF(blocker_neighbor))
-				blocking_dirs |= dir_to_check
-
-
-		var/shadow_key = "[x_offset]-[y_offset]-[blocking_dirs]-[range]"
+		var/shadow_key = "[x_offset]_[y_offset]_[range]"
 		var/image/cast_shadow = GLOB.lighting_shadows_cache[shadow_key]
 		if(!cast_shadow)
-			GLOB.lighting_shadows_cache[shadow_key] = cast_shadow = image(light_object.icon, icon_state = "[x_offset]_[y_offset]_[blocking_dirs]", layer = LIGHTING_SHADOW_LAYER)
+			GLOB.lighting_shadows_cache[shadow_key] = cast_shadow = image(light_object.icon, icon_state = "[x_offset]_[y_offset]", layer = LIGHTING_SHADOW_LAYER)
 		shadows += cast_shadow
-		/*
-		var/blocking_dirs = NONE
-		for(var/direction in GLOB.cardinals)
-			var/turf/blocker_neighbor = get_step(blocker, direction)
-			if(!blocker_neighbor)
-				continue //Map limits.
-			if(IS_OPAQUE_TURF(blocker_neighbor))
-				blocking_dirs |= direction
-		var/blocker_light_key = "[blocking_dirs]-[get_dir(blocker, epicenter)]"
-		switch(blocker_light_key)
-			if("1-1", "2-2", "3-1", "3-2", "4-4", "5-1", "5-4", "6-2", "6-4", "7-1", "7-2", "7-4", "8-8", "9-1", "9-8", "10-2", "10-8", "11-1", "11-2", "11-8", "12-4", "12-8", "13-1", "13-4", "13-8", "14-2", "14-4", "14-8", "15-1", "15-2", "15-4", "15-8")
-				//No sprites for these combinations. Let's not waste time overlaying an empty image.
-			else
-				cast_shadow = GLOB.lighting_blocker_cache[blocker_light_key]
-				if(!cast_shadow)
-					GLOB.lighting_blocker_cache[blocker_light_key] = cast_shadow = image('icons/effects/light_overlays/wall_lighting.dmi', icon_state = blocker_light_key, layer = LIGHTING_BLOCKER_LAYER)
-				cast_shadow.pixel_x = (WORLD_ICON_SIZE * range) + (WORLD_ICON_SIZE * x_offset)
-				cast_shadow.pixel_y = (WORLD_ICON_SIZE * range) + (WORLD_ICON_SIZE * y_offset)
-				shadows += cast_shadow
-			*/
 	light_object.overlays = shadows
 
 
@@ -189,10 +139,10 @@ GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 	if(.)
 		var/turf/old_epicenter = .
 		old_epicenter.dynamic_lumcount -= lum_power
-		old_epicenter.vis_contents -= light_object
+		light_object.moveToNullspace()
 	if(epicenter)
 		epicenter.dynamic_lumcount += lum_power
-		epicenter.vis_contents += light_object
+		light_object.forceMove(epicenter)
 	make_luminosity_update()
 
 
@@ -299,3 +249,9 @@ GLOBAL_LIST_EMPTY(lighting_blocker_cache)
 		return
 	static_lighting_flags &= ~LIGHTING_ON
 	set_epicenter(null)
+
+
+///Toggles the light on and off.
+/datum/component/static_lighting/proc/on_turf_directional_opacity_change(atom/source, old_opacity)
+	SIGNAL_HANDLER
+	make_luminosity_update()

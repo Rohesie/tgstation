@@ -247,6 +247,8 @@
 #define COMSIG_TURF_MULTIZ_DEL "turf_multiz_del"
 ///from base of turf/multiz_turf_new: (turf/source, direction)
 #define COMSIG_TURF_MULTIZ_NEW "turf_multiz_new"
+///from base of turf/set_directional_opacity(): (old_directional_opacity)
+#define COMSIG_TURF_POST_SET_DIRECTIONAL_OPACITY "turf_post_set_directional_opacity"
 
 // /atom/movable signals
 
@@ -315,6 +317,8 @@
 #define COMSIG_MOVABLE_UPDATE_GLIDE_SIZE "movable_glide_size"
 ///Called when a movable is hit by a plunger in layer mode, from /obj/item/plunger/attack_obj()
 #define COMSIG_MOVABLE_CHANGE_DUCT_LAYER "movable_change_duct_layer"
+///from base of /atom/movable/afterShuttleMove(): (turf/oldT, list/movement_force, shuttle_dir, shuttle_preferred_direction, move_dir, rotation)
+#define COMSIG_MOVABLE_POST_AFTERSHUTTLEMOVE "movable_post_aftershuttlemove"
 
 // /mob signals
 

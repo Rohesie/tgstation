@@ -63,7 +63,7 @@
 		//update_light()
 
 	if (opacity)
-		directional_opacity = ALL_CARDINALS
+		set_directional_opacity(ALL_CARDINALS)
 
 	var/turf/T = SSmapping.get_turf_above(src)
 	if(T)

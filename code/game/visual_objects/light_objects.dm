@@ -16,6 +16,13 @@
 	vis_flags = NONE
 
 
+/atom/movable/vis_obj/light_source/Destroy(force)
+	if(force)
+		return ..()
+	stack_trace("Something attempted to improperly destroy a light source object.")
+	return QDEL_HINT_LETMELIVE
+
+
 /atom/movable/vis_obj/lighting_mask
 	name = ""
 	icon = 'icons/effects/light_overlays/light_32.dmi'
