@@ -7,8 +7,8 @@
 	appearance_flags = KEEP_TOGETHER
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	invisibility = INVISIBILITY_LIGHTING
-	pixel_x = -WORLD_ICON_SIZE * 2
-	pixel_y = -WORLD_ICON_SIZE * 2
+	pixel_x = -WORLD_ICON_SIZE
+	pixel_y = -WORLD_ICON_SIZE
 	glide_size = WORLD_ICON_SIZE
 	blend_mode = BLEND_ADD
 	anchored = TRUE
