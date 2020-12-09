@@ -115,16 +115,65 @@ GLOBAL_LIST_EMPTY(lighting_shadows_cache)
 		return
 	. = get_new_turfs()
 	var/list/shadows = list()
+	var/static/list/shadow_icons = list(
+		"2-5" = 'icons/effects/light_overlays/shadows_range_2-n-ne.dmi',
+		"2-6" = 'icons/effects/light_overlays/shadows_range_2-e-se.dmi',
+		"2-10" = 'icons/effects/light_overlays/shadows_range_2-s-sw.dmi',
+		"2-9" = 'icons/effects/light_overlays/shadows_range_2-n-nw.dmi',
+
+		"3-5" = 'icons/effects/light_overlays/shadows_range_3-n-ne.dmi',
+		"3-6" = 'icons/effects/light_overlays/shadows_range_3-e-se.dmi',
+		"3-10" = 'icons/effects/light_overlays/shadows_range_3-s-sw.dmi',
+		"3-9" = 'icons/effects/light_overlays/shadows_range_3-n-nw.dmi',
+
+		"4-5" = 'icons/effects/light_overlays/shadows_range_4-n-ne.dmi',
+		"4-6" = 'icons/effects/light_overlays/shadows_range_4-e-se.dmi',
+		"4-10" = 'icons/effects/light_overlays/shadows_range_4-s-sw.dmi',
+		"4-9" = 'icons/effects/light_overlays/shadows_range_4-n-nw.dmi',
+
+		"5-5" = 'icons/effects/light_overlays/shadows_range_5-n-ne.dmi',
+		"5-6" = 'icons/effects/light_overlays/shadows_range_5-e-se.dmi',
+		"5-10" = 'icons/effects/light_overlays/shadows_range_5-s-sw.dmi',
+		"5-9" = 'icons/effects/light_overlays/shadows_range_5-n-nw.dmi',
+
+		"6-5" = 'icons/effects/light_overlays/shadows_range_6-n-ne.dmi',
+		"6-6" = 'icons/effects/light_overlays/shadows_range_6-e-se.dmi',
+		"6-10" = 'icons/effects/light_overlays/shadows_range_6-s-sw.dmi',
+		"6-9" = 'icons/effects/light_overlays/shadows_range_6-n-nw.dmi',
+
+		"7-5" = 'icons/effects/light_overlays/shadows_range_7-n-ne.dmi',
+		"7-6" = 'icons/effects/light_overlays/shadows_range_7-e-se.dmi',
+		"7-10" = 'icons/effects/light_overlays/shadows_range_7-s-sw.dmi',
+		"7-9" = 'icons/effects/light_overlays/shadows_range_7-n-nw.dmi',
+	)
 	for(var/t in .)
 		var/turf/blocker = t
 		var/x_offset = blocker.x - light_holder.x
 		var/y_offset = blocker.y - light_holder.y
+
 		if(range >= 6 && abs(x_offset) >= range - 1 && abs(x_offset) == abs(y_offset))
 			continue //Large ranges skip making shadows for the corner edges, which are already obscured by the base image.
-		var/shadow_key = "[x_offset]_[y_offset]_[range]"
+		var/adjacent_opaque_junctions = NONE
+		for(var/direction in GLOB.cardinals)
+			var/turf/blocker_neighbor = get_step(blocker, direction)
+			if(!blocker_neighbor)
+				continue //Map limits.
+			if(IS_OPAQUE_TURF(blocker_neighbor))
+				adjacent_opaque_junctions |= direction
+		var/shadow_key = "[range]_[x_offset]_[y_offset]_[adjacent_opaque_junctions]"
 		var/image/cast_shadow = GLOB.lighting_shadows_cache[shadow_key]
 		if(!cast_shadow)
-			GLOB.lighting_shadows_cache[shadow_key] = cast_shadow = image(light_object.icon, icon_state = "[x_offset]_[y_offset]", layer = LIGHTING_SHADOW_LAYER)
+			var/shadow_dir
+			switch(get_dir(light_holder, blocker))
+				if(NORTH, NORTHEAST)
+					shadow_dir = NORTHEAST
+				if(EAST, SOUTHEAST)
+					shadow_dir = SOUTHEAST
+				if(SOUTH, SOUTHWEST)
+					shadow_dir = SOUTHWEST
+				if(WEST, NORTHWEST)
+					shadow_dir = NORTHWEST
+			GLOB.lighting_shadows_cache[shadow_key] = cast_shadow = image(shadow_icons["[range]-[shadow_dir]"], icon_state = "[x_offset]_[y_offset]_[adjacent_opaque_junctions]", layer = LIGHTING_SHADOW_LAYER)
 		shadows += cast_shadow
 	light_object.overlays = shadows
 
